@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Officer Portal — SurakshaAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Leaflet Map CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- vis-network library for interactive graphs -->
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--font-body);
+      display: block;
+      /* Override default centered flex layout from style.css */
+    }
+
+    .dashboard-layout {
+      display: flex;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: var(--surface);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 100;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-top {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      height: 70px;
+      box-sizing: border-box;
+    }
+
+    .logo-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(242, 169, 59, 0.12);
+      color: var(--alert);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(242, 169, 59, 0.4);
+    }
+
+    .logo-avatar svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .logo-text span {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .logo-text small {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--alert);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 1px;
+    }
+
+    .sidebar-menu {
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .menu-item {
+      background: transparent;
+      border: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      color: var(--muted);
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+      text-decoration: none;
+    }
+
+    .menu-item svg {
+      width: 18px;
+      height: 18px;
+      color: currentColor;
+      flex-shrink: 0;
+    }
+
+    .menu-item.active {
+      background: rgba(242, 169, 59, 0.1);
+      color: var(--alert);
+      font-weight: 600;
+    }
+
+    .menu-item:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    /* Main Content Wrapper */
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      min-width: 0;
+      height: 100vh;
+    }
+
+    /* Top Bar */
+    .topbar {
+      height: 70px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .topbar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .console-prefix {
+      color: var(--muted);
+    }
+
+    .separator {
+      color: var(--muted-2);
+    }
+
+    .active-title {
+      color: var(--alert);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .officer-profile-mini {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-family: var(--font-mono);
+    }
+
+    .badge-tag {
+      color: var(--alert);
+      font-size: 9.5px;
+      letter-spacing: 0.04em;
+    }
+
+    .profile-name {
+      color: #fff;
+      font-weight: 600;
+      font-family: var(--font-body);
+      font-size: 13px;
+    }
+
+    .btn-logout {
+      background: rgba(229, 72, 77, 0.1);
+      border: 1px solid rgba(229, 72, 77, 0.35);
+      color: var(--danger);
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-logout:hover {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    .btn-logout svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .sidebar-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: transparent;
+      border: 0;
+      padding: 6px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .sidebar-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+    }
+
+    .content-container {
+      padding: 32px;
+      overflow-y: auto;
+      flex-grow: 1;
+      background: var(--ink);
+      box-sizing: border-box;
+    }
+
+    /* Panel Anim */
+    .dashboard-panel {
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-top: 6px;
+      margin-bottom: 28px;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .grid-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .grid-card h3 {
+      font-family: var(--font-display);
+      font-size: 17px;
+      color: #fff;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      margin-top: 0;
+    }
+
+    /* Profile Card Details */
+    .avatar-large {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(242, 169, 59, 0.1);
+      color: var(--alert);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(242, 169, 59, 0.25);
+      margin: 0 auto 20px;
+    }
+
+    .avatar-large svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .detail-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .detail-row span {
+      color: var(--muted);
+    }
+
+    .detail-row strong {
+      color: var(--text);
+    }
+
+    .session-stamp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--safe);
+    }
+
+    .dot-green {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--safe);
+      box-shadow: 0 0 8px rgba(47, 190, 143, 0.6);
+    }
+
+    /* Telemetry Grid */
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .tel-item {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tel-val {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tel-val.alert-color {
+      color: var(--alert);
+    }
+
+    .tel-val.safe-color {
+      color: var(--safe);
+    }
+
+    .tel-lbl {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    /* Overview styling */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .overview-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .overview-card h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: var(--alert);
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+
+    .overview-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Heatmap styling */
+    .section-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .map-select {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      outline: none;
+    }
+
+    /* Dark Theme Leaflet Popups & Map overrides */
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+      background: var(--surface) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+      border-radius: 8px !important;
+    }
+
+    .leaflet-popup-content {
+      margin: 12px 16px !important;
+      line-height: 1.4 !important;
+    }
+
+    .leaflet-container a.leaflet-popup-close-button {
+      color: var(--muted) !important;
+      padding: 8px 8px 0 0 !important;
+      font-size: 16px !important;
+    }
+
+    .leaflet-container a.leaflet-popup-close-button:hover {
+      color: #fff !important;
+    }
+
+    .map-legend {
+      background: rgba(8, 13, 23, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      padding: 12px 16px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .leg-color {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .leg-color.red {
+      background: var(--danger);
+    }
+
+    .leg-color.yellow {
+      background: var(--alert);
+    }
+
+    .leg-color.green-leg {
+      background: var(--safe);
+    }
+
+    /* Currency Scanner Section styling */
+    .scanner-split-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 28px;
+    }
+
+    .audit-card,
+    .audit-details-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .audit-card h3,
+    .audit-details-card h3 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      margin-top: 0;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+    }
+
+    .audit-table th {
+      color: var(--muted-2);
+      font-weight: 600;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .audit-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .audit-table tr.flagged-row td {
+      background: rgba(229, 72, 77, 0.03);
+    }
+
+    .lbl-status {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .lbl-status.genuine {
+      background: rgba(47, 190, 143, 0.12);
+      color: var(--safe);
+      border: 1px solid rgba(47, 190, 143, 0.3);
+    }
+
+    .lbl-status.counterfeit {
+      background: rgba(229, 72, 77, 0.12);
+      color: var(--danger);
+      border: 1px solid rgba(229, 72, 77, 0.35);
+    }
+
+    .checkpoint-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checkpoint-list li {
+      font-size: 13.5px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .checkpoint-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .checkpoint-list li.check-passed::before {
+      background: var(--safe);
+    }
+
+    .checkpoint-list li.check-failed::before {
+      background: var(--danger);
+    }
+
+    .checkpoint-list strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .checkpoint-list span {
+      color: var(--muted);
+    }
+
+    /* Network Graph style */
+    .graph-visual-box {
+      background: var(--surface-2);
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .network-svg {
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .graph-legend {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .node-lbl {
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .node-lbl.warning {
+      color: var(--alert);
+    }
+
+    .node-lbl.danger {
+      color: var(--danger);
+    }
+
+    /* Alerts Feed Style */
+    .alert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+    }
+
+    .feed-card {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 24px;
+      border-left: 4px solid var(--line-strong);
+      transition: transform 0.2s ease;
+    }
+
+    .feed-card:hover {
+      transform: translateX(4px);
+    }
+
+    .feed-card.alert-danger {
+      border-left-color: var(--danger);
+      background: linear-gradient(90deg, rgba(229, 72, 77, 0.02), transparent);
+    }
+
+    .feed-card.alert-warning {
+      border-left-color: var(--alert);
+      background: linear-gradient(90deg, rgba(242, 169, 59, 0.02), transparent);
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .alert-tag {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .alert-tag.danger {
+      color: var(--danger);
+    }
+
+    .alert-tag.warning {
+      color: var(--alert);
+    }
+
+    .time-stamp {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted-2);
+    }
+
+    .feed-card h4 {
+      font-family: var(--font-display);
+      font-size: 16.5px;
+      color: #fff;
+      margin-bottom: 8px;
+      margin-top: 0;
+    }
+
+    .transcript {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--muted);
+      background: var(--surface-2);
+      padding: 12px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-action {
+      border: 0;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action.primary {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .btn-action.primary:hover {
+      background: rgba(229, 72, 77, 0.85);
+    }
+
+    .btn-action.secondary {
+      background: var(--surface-3);
+      border: 1px solid var(--line-strong);
+      color: var(--text);
+    }
+
+    .btn-action.secondary:hover {
+      background: var(--line-strong);
+    }
+
+    /* Mobile responsiveness styling */
+    @media (max-width: 992px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scanner-split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+      }
+
+      .sidebar.is-open {
+        transform: translateX(0);
+      }
+
+      .sidebar-toggle {
+        display: flex;
+      }
+
+      .content-container {
+        padding: 20px;
+      }
+
+      .topbar {
+        padding: 0 16px;
+      }
+
+      .topbar-actions .officer-profile-mini {
+        display: none;
+        /* Hide on mobile to save space */
+      }
+
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard-layout">
+    <!-- Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <!-- Human avatar logo coinciding at leftmost top corner -->
+        <div class="logo-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span>SurakshaAI</span>
+          <small>COMMAND</small>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu Links -->
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-section="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" />
+            <rect x="14" y="3" width="7" height="5" />
+            <rect x="14" y="12" width="7" height="9" />
+            <rect x="3" y="16" width="7" height="5" />
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="menu-item" data-section="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span>Overview</span>
+        </button>
+        <button class="menu-item" data-section="heatmap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+            <line x1="8" y1="2" x2="8" y2="18" />
+            <line x1="16" y1="6" x2="16" y2="22" />
+          </svg>
+          <span>Geospatial Heatmap</span>
+        </button>
+        <button class="menu-item" data-section="scanner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <line x1="12" y1="4" x2="12" y2="20" />
+          </svg>
+          <span>Currency Scanner</span>
+        </button>
+        <button class="menu-item" data-section="network">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>
+          <span>Fraud Network</span>
+        </button>
+        <button class="menu-item" data-section="alerts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span>Live Scam Alert</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Panel Wrapper -->
+    <div class="main-wrapper">
+      <!-- Top Bar Header -->
+      <header class="topbar">
+        <!-- Hamburger menu triggers drawer on mobile screens -->
+        <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="topbar-title">
+          <span class="console-prefix">Officer Console</span>
+          <span class="separator">/</span>
+          <span class="active-title" id="activeTitle">Dashboard</span>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="officer-profile-mini">
+            <span class="badge-tag" id="topBadge">Badge ID</span>
+            <span class="profile-name" id="topName">Officer</span>
+          </div>
+          <button class="btn-logout" id="logoutBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span>LOGOUT</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Dynamic Work Area -->
+      <main class="content-container">
+
+        <!-- View 1: Dashboard Panel -->
+        <div class="dashboard-panel" id="panel-dashboard">
+          <h2>Officer Intelligence Command Center</h2>
+          <p class="section-desc">Access encrypted investigation resources, verify fraud statistics, and monitor local
+            jurisdictional data.</p>
+
+          <div class="dashboard-grid">
+            <!-- Credentials Card -->
+            <div class="grid-card" style="width: 100%;">
+              <h3>Secure Officer Profile</h3>
+              <div class="profile-details">
+                <div class="avatar-large">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+                <div class="detail-rows">
+                  <div class="detail-row"><span>Full Name:</span><strong id="cardName"></strong></div>
+                  <div class="detail-row"><span>Username:</span><strong id="cardUsername"></strong></div>
+                  <div class="detail-row"><span>Official Email:</span><strong id="cardEmail"></strong></div>
+                  <div class="detail-row"><span>Department:</span><strong id="cardDepartment"></strong></div>
+                  <div class="detail-row"><span>Badge Code:</span><strong id="cardBadge"></strong></div>
+                  <div class="detail-row"><span>Assigned Station:</span><strong id="cardStation"></strong></div>
+                </div>
+              </div>
+              <div class="session-stamp">
+                <span class="dot-green"></span>
+                <span>JWT SECURED CONSOLE SESSION IS ACTIVE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 2: Overview Panel -->
+        <div class="dashboard-panel" id="panel-overview" style="display: none;">
+          <h2>System Capability Overview</h2>
+          <p class="section-desc">SurakshaAI combines high-resolution image analysis, natural language processing, and
+            geospatial plotting.</p>
+
+          <div class="overview-grid">
+            <div class="overview-card">
+              <h4>Geospatial Hotspots</h4>
+              <p>Tracks coordinates of reported transactions and VoIP calls, identifying local coordinates to direct
+                patrol routes.</p>
+            </div>
+            <div class="overview-card">
+              <h4>Forensic Banknote Auditing</h4>
+              <p>Analyzes scans for Microtext alignment, Mahatma Gandhi watermark intensity, and color-shifting security
+                threads.</p>
+            </div>
+            <div class="overview-card">
+              <h4>Fraud Syndicate Graphs</h4>
+              <p>Builds connection clusters of accounts, phone numbers, and gateway devices to detect money laundering
+                rings.</p>
+            </div>
+            <div class="overview-card">
+              <h4>Digital Arrest Scam Detection</h4>
+              <p>Classify live call flows and scripts in real time to prevent transfer attempts before the money moves.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 3: Heatmap Panel -->
+        <div class="dashboard-panel" id="panel-heatmap" style="display: none;">
+          <div class="section-header-row">
+            <div>
+              <h2>Geospatial Crime Mapping</h2>
+              <p class="section-desc">Density tracking of reported digital arrest calls, phishing hubs, and fake POS
+                terminals.</p>
+            </div>
+            <div>
+              <select class="map-select" id="mapStateSelect" aria-label="Select state filter">
+                <option value="all">All States (National Map)</option>
+                <option value="Delhi">Delhi NCR</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="big-map-container"
+            style="position: relative; height: 450px; margin-top: 10px; border-radius: 12px; border: 1px solid var(--line-strong); overflow: hidden;">
+            <div id="realMap" style="width: 100%; height: 100%; z-index: 1;"></div>
+
+            <div class="map-legend"
+              style="z-index: 1000; position: absolute; bottom: 20px; left: 20px; background: rgba(8, 13, 23, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--line); padding: 12px 16px; border-radius: 6px; display: flex; flex-direction: column; gap: 8px;">
+              <div class="legend-item"><span class="leg-color red"></span><span>Critical Incident Hub (Score &ge;
+                  70)</span></div>
+              <div class="legend-item"><span class="leg-color yellow"></span><span>High Priority Area (Score
+                  40-69)</span></div>
+              <div class="legend-item"><span class="leg-color green-leg"></span><span>General Incident Mapped (Score
+                  &lt; 40)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 4: Currency Scanner Panel -->
+        <div class="dashboard-panel" id="panel-scanner" style="display: none;">
+          <h2>Forensic Banknote Audit Log</h2>
+          <p class="section-desc">Audit submissions logged by merchants or citizens verifying security thread OVI
+            features and Gandhi profiles.</p>
+
+          <div class="scanner-split-layout">
+            <div class="audit-card">
+              <h3>Banknote Submissions</h3>
+              <div class="table-container">
+                <table class="audit-table">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Serial Number</th>
+                      <th>Value</th>
+                      <th>Confidence</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2026-07-22 10:30</td>
+                      <td>4AP*392013</td>
+                      <td>₹500</td>
+                      <td class="safe-color">99.8%</td>
+                      <td><span class="lbl-status genuine">GENUINE</span></td>
+                    </tr>
+                    <tr class="flagged-row">
+                      <td>2026-07-22 09:15</td>
+                      <td>7DF*210459</td>
+                      <td>₹500</td>
+                      <td class="danger-color">42.1%</td>
+                      <td><span class="lbl-status counterfeit">COUNTERFEIT</span></td>
+                    </tr>
+                    <tr>
+                      <td>2026-07-21 18:22</td>
+                      <td>1EC*908722</td>
+                      <td>₹200</td>
+                      <td class="safe-color">98.5%</td>
+                      <td><span class="lbl-status genuine">GENUINE</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="audit-details-card">
+              <h3>Forensic Audit Diagnostics</h3>
+              <ul class="checkpoint-list">
+                <li class="check-passed">
+                  <strong>Microprinting verification</strong>
+                  <span>OK - RBI inscriptions are fully readable under 10x visual zoom.</span>
+                </li>
+                <li class="check-failed">
+                  <strong>Optically Variable Ink (OVI) Thread</strong>
+                  <span class="danger-color">FAIL - Color shift parameters do not match Indian Banknote
+                    standards.</span>
+                </li>
+                <li class="check-passed">
+                  <strong>Watermark diagnostic</strong>
+                  <span>OK - Portrait watermarks match correct 3D depth indexes.</span>
+                </li>
+                <li class="check-failed">
+                  <strong>Paper fiber test</strong>
+                  <span class="danger-color">FAIL - Fluorescence profile suggests synthetic printing paper.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 5: Fraud Network Panel -->
+        <div class="dashboard-panel" id="panel-network" style="display: none;">
+          <h2>Fraud Ring Graph Analysis</h2>
+          <p class="section-desc">Search and map connections between money-mule bank accounts, devices, and caller IDs
+            in real time.</p>
+
+          <!-- Graph Search Form -->
+          <div class="graph-search-bar"
+            style="margin-bottom: 24px; display: flex; gap: 12px; background: var(--surface); padding: 16px; border-radius: 8px; border: 1px solid var(--line-strong); flex-wrap: wrap;">
+            <div style="flex-grow: 1; min-width: 200px;">
+              <label for="graphNodeId"
+                style="display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; font-family: var(--font-mono); letter-spacing: 0.05em;">TARGET
+                NODE ID (e.g. ACC0000002, ACC0000006)</label>
+              <input type="text" id="graphNodeId" class="map-select"
+                style="width: 100%; box-sizing: border-box; font-family: var(--font-mono); font-size: 13.5px; height: 38px; border: 1px solid var(--line-strong);"
+                value="ACC0000002" required />
+            </div>
+            <div style="width: 130px;">
+              <label for="graphDepth"
+                style="display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; font-family: var(--font-mono); letter-spacing: 0.05em;">DEPTH
+                HOPS</label>
+              <select id="graphDepth" class="map-select"
+                style="width: 100%; height: 38px; border: 1px solid var(--line-strong);">
+                <option value="1">1 Hop</option>
+                <option value="2" selected>2 Hops</option>
+                <option value="3">3 Hops</option>
+              </select>
+            </div>
+            <div style="display: flex; align-items: flex-end;">
+              <button type="button" id="btnQueryGraph" class="btn-citizen-cta"
+                style="margin: 0; padding: 0 20px; font-size: 12px; font-family: var(--font-mono); font-weight: 700; border-radius: 6px; background: var(--alert); color: #080d17; border: 0; cursor: pointer; height: 38px; display: flex; align-items: center; justify-content: center;">
+                QUERY NETWORK
+              </button>
+            </div>
+          </div>
+
+          <!-- Graph Output Stats -->
+          <div id="graphStats"
+            style="display: none; margin-bottom: 20px; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+            <div class="overview-card"
+              style="padding: 14px; text-align: center; background: var(--surface-2); border: 1px solid var(--line);">
+              <h5
+                style="margin: 0 0 4px; font-family: var(--font-mono); color: var(--muted); font-size: 10px; text-transform: uppercase;">
+                Fraud Ring Detected</h5>
+              <span id="statFraudRing"
+                style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--danger);">NO</span>
+            </div>
+            <div class="overview-card"
+              style="padding: 14px; text-align: center; background: var(--surface-2); border: 1px solid var(--line);">
+              <h5
+                style="margin: 0 0 4px; font-family: var(--font-mono); color: var(--muted); font-size: 10px; text-transform: uppercase;">
+                Suspicious Connections</h5>
+              <span id="statSuspiciousAmount"
+                style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--alert);">0.00</span>
+            </div>
+            <div class="overview-card"
+              style="padding: 14px; text-align: center; background: var(--surface-2); border: 1px solid var(--line);">
+              <h5
+                style="margin: 0 0 4px; font-family: var(--font-mono); color: var(--muted); font-size: 10px; text-transform: uppercase;">
+                Nodes Mapped</h5>
+              <span id="statNodesCount"
+                style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #fff;">0</span>
+            </div>
+          </div>
+
+          <!-- Interactive Network Container -->
+          <div class="graph-visual-box"
+            style="position: relative; height: 480px; background: var(--surface-2); border-radius: 12px; border: 1px solid var(--line-strong); padding: 0; overflow: hidden; display: block; box-shadow: inset 0 0 30px rgba(0,0,0,0.4);">
+            <div id="interactiveNetwork" style="width: 100%; height: 100%; z-index: 1;"></div>
+
+            <div id="graphLoader"
+              style="position: absolute; inset: 0; background: rgba(15, 24, 48, 0.85); display: none; align-items: center; justify-content: center; z-index: 10; color: var(--alert); font-family: var(--font-mono); font-size: 13px;">
+              <span class="dot-green" style="margin-right: 8px;"></span> RESOLVING ENTITY LINKAGES GRAPH...
+            </div>
+
+            <!-- Node Type Legend inside container -->
+            <div class="map-legend"
+              style="z-index: 5; position: absolute; bottom: 20px; left: 20px; background: rgba(8, 13, 23, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--line); padding: 12px 16px; border-radius: 6px; display: flex; flex-direction: column; gap: 8px; margin: 0;">
+              <div class="legend-item"><span class="leg-color"
+                  style="background: #e5484d; width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span><span>Flagged
+                  / Suspect Entity</span></div>
+              <div class="legend-item"><span class="leg-color"
+                  style="background: #3e6fe0; width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span><span>Device
+                  Profile Node</span></div>
+              <div class="legend-item"><span class="leg-color"
+                  style="background: #2fbe8f; width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span><span>Active
+                  Account / Caller ID Node</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 6: Live Scam Alert Panel -->
+        <div class="dashboard-panel" id="panel-alerts" style="display: none;">
+          <h2>Live Cybercrime Alert Feed</h2>
+          <p class="section-desc">Active alert telemetry generated by AI speech processors and citizen portal
+            submissions.</p>
+
+          <div class="alert-list">
+            <div class="feed-card alert-danger">
+              <div class="card-head">
+                <span class="alert-tag danger">● CRITICAL INCIDENT</span>
+                <span class="time-stamp">2 mins ago</span>
+              </div>
+              <h4>Digital Arrest Attempt Flagged</h4>
+              <p class="transcript">"Aadhaar verification status suspended. Please remain on camera or face warrant
+                issue..."</p>
+              <div class="actions">
+                <button type="button" class="btn-action primary"
+                  onclick="alert('Account frozen for audit purposes.')">Freeze Target Account</button>
+                <button type="button" class="btn-action secondary"
+                  onclick="alert('Local police circle notified.')">Notify Circle</button>
+              </div>
+            </div>
+
+            <div class="feed-card alert-warning">
+              <div class="card-head">
+                <span class="alert-tag warning">● SPAM TELEMETRY</span>
+                <span class="time-stamp">12 mins ago</span>
+              </div>
+              <h4>Spoofed Payment Gateway Portal</h4>
+              <p class="transcript">Linked to fake electricity bill SMS reporting in Hyderabad Metropolitan area.</p>
+              <div class="actions">
+                <button type="button" class="btn-action primary" onclick="alert('Domain reporting request filed.')">File
+                  Takedown</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Hidden Authentication modal structure retained for JS links compliance -->
+  <div class="modal-overlay" id="authModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Close dialog">×</button>
+      <h3 id="modalTitle">Secure Session</h3>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Authentication and localStorage verify
+    const officer = JSON.parse(localStorage.getItem("officer"));
+    if (!officer) {
+      window.location.href = "login.html";
+    } else {
+      // Populate profile views
+      document.getElementById("topBadge").textContent = "Badge: " + officer.badge_id;
+      document.getElementById("topName").textContent = officer.name;
+
+      document.getElementById("cardName").textContent = officer.name;
+      document.getElementById("cardUsername").textContent = officer.username;
+      document.getElementById("cardEmail").textContent = officer.email;
+      document.getElementById("cardDepartment").textContent = officer.department;
+      document.getElementById("cardBadge").textContent = officer.badge_id;
+      document.getElementById("cardStation").textContent = officer.station;
+    }
+
+    // Dynamic Section Toggling
+    const menuItems = document.querySelectorAll(".menu-item");
+    const panels = document.querySelectorAll(".dashboard-panel");
+    const activeTitle = document.getElementById("activeTitle");
+    const sidebar = document.getElementById("sidebar");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+
+    menuItems.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Remove active classes
+        menuItems.forEach((item) => item.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Show chosen panel
+        const targetSection = btn.getAttribute("data-section");
+        panels.forEach((panel) => {
+          if (panel.id === `panel-${targetSection}`) {
+            panel.style.display = "block";
+          } else {
+            panel.style.display = "none";
+          }
+        });
+
+        // Update top bar active title path
+        activeTitle.textContent = btn.querySelector("span").textContent;
+
+        // Close mobile sidebar menu if open
+        if (sidebar) {
+          sidebar.classList.remove("is-open");
+        }
+
+        // Trigger Map init if Geospatial Heatmap is chosen
+        if (targetSection === "heatmap") {
+          setTimeout(initHeatmapMap, 150);
+        }
+
+        // Trigger Graph init if Fraud Network is chosen
+        if (targetSection === "network") {
+          setTimeout(initFraudNetworkGraph, 150);
+        }
+      });
+    });
+
+    // Mobile Drawer Toggle
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle("is-open");
+      });
+
+      // Clicking outside sidebar closes it on mobile
+      document.addEventListener("click", (e) => {
+        if (window.innerWidth <= 768) {
+          if (sidebar.classList.contains("is-open") && !sidebar.contains(e.target) && e.target !== sidebarToggle) {
+            sidebar.classList.remove("is-open");
+          }
+        }
+      });
+    }
+
+    // --- Interactive Leaflet Heatmap Implementation ---
+    let map;
+    let mapInitialized = false;
+
+    const initHeatmapMap = async () => {
+      if (mapInitialized) {
+        if (map) {
+          map.invalidateSize();
+        }
+        return;
+      }
+
+      const mapContainer = document.getElementById("realMap");
+      if (!mapContainer) return;
+
+      // Initialize Map centered on India coordinate hub
+      map = L.map("realMap").setView([20.5937, 78.9629], 5);
+
+      // Load Dark Matter Map Tiles
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: "abcd",
+        maxZoom: 20
+      }).addTo(map);
+
+      mapInitialized = true;
+
+      // Fetch initial hotspots
+      await fetchHotspots();
+    };
+
+    const fetchHotspots = async (filterState = "all") => {
+      const token = localStorage.getItem("token") || localStorage.getItem("access_token");
+      try {
+        const response = await fetch("http://localhost:8000/api/geospatial/hotspots?n=50", {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        if (!response.ok) throw new Error("Failed to load geospatial models");
+        let hotspots = await response.json();
+
+        // Filter on state if selected
+        if (filterState !== "all") {
+          hotspots = hotspots.filter(h =>
+            h.states_spanned.toLowerCase().includes(filterState.toLowerCase())
+          );
+        }
+
+        // Clear existing markers
+        map.eachLayer((layer) => {
+          if (layer instanceof L.CircleMarker) {
+            map.removeLayer(layer);
+          }
+        });
+
+        if (hotspots.length === 0) return;
+
+        const boundsGroup = [];
+
+        hotspots.forEach(h => {
+          // Determine marker colors based on patrol priority score outputs
+          let color = "#2fbe8f"; // low priority (< 40)
+          if (h.patrol_priority_score >= 70) {
+            color = "#e5484d"; // critical priority (>= 70)
+          } else if (h.patrol_priority_score >= 40) {
+            color = "#f2a93b"; // high priority (40-69)
+          }
+
+          const radius = Math.max(10, Math.min(24, h.event_count / 8));
+
+          const marker = L.circleMarker([h.centroid_lat, h.centroid_lon], {
+            radius: radius,
+            fillColor: color,
+            color: color,
+            weight: 1.5,
+            opacity: 0.9,
+            fillOpacity: 0.35
+          }).addTo(map);
+
+          boundsGroup.push([h.centroid_lat, h.centroid_lon]);
+
+          marker.bindPopup(`
+              <div style="font-family: var(--font-body); color: #fff; min-width: 220px;">
+                <h4 style="margin: 0 0 6px; color: var(--alert); font-family: var(--font-display); font-size: 13.5px; border-bottom: 1px solid var(--line); padding-bottom: 4px;">
+                  ${h.cluster_id} (DBSCAN Cluster)
+                </h4>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>Coordinates:</strong> ${h.centroid_lat.toFixed(5)}, ${h.centroid_lon.toFixed(5)}
+                </p>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>Street Address:</strong> <span id="street-${h.cluster_id}" style="color: var(--alert); font-weight: 500;">Loading address...</span>
+                </p>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>District:</strong> <span id="district-${h.cluster_id}">${h.districts_spanned.split(',')[0]}</span>
+                </p>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>State:</strong> <span id="state-${h.cluster_id}">${h.states_spanned.split(',')[0]}</span>
+                </p>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>Dominant Crime:</strong> ${h.dominant_crime_category}
+                </p>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>Aggregate Incidents:</strong> ${h.event_count}
+                </p>
+                <p style="margin: 3px 0; font-size: 11px; color: var(--text);">
+                  <strong>Patrol Priority:</strong> 
+                  <span style="color: ${color}; font-weight: bold; font-family: var(--font-mono);">${h.patrol_priority_score}</span>
+                </p>
+              </div>
+            `);
+
+          // Asynchronously reverse geocode when popup opens
+          marker.on('popupopen', async function() {
+            const streetSpan = document.getElementById(`street-${h.cluster_id}`);
+            const stateSpan = document.getElementById(`state-${h.cluster_id}`);
+            const districtSpan = document.getElementById(`district-${h.cluster_id}`);
+            
+            if (streetSpan && streetSpan.textContent === "Loading address...") {
+              try {
+                const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${h.centroid_lat}&lon=${h.centroid_lon}&format=jsonv2`, {
+                  headers: {
+                    'Accept-Language': 'en'
+                  }
+                });
+                if (geoRes.ok) {
+                  const geoData = await geoRes.json();
+                  const address = geoData.address || {};
+                  
+                  // Extract singular street address details
+                  const streetName = address.road || address.suburb || address.neighbourhood || address.city_district || address.county || geoData.display_name.split(',')[0] || "Unknown Road";
+                  const cityName = address.city || address.town || address.village || "";
+                  streetSpan.textContent = streetName + (cityName ? `, ${cityName}` : "");
+                  
+                  // Overwrite spans to display only the single geocoded state and district of the address
+                  const stateVal = address.state || address.region || h.states_spanned.split(',')[0].trim();
+                  const districtVal = address.state_district || address.county || address.district || address.city || h.districts_spanned.split(',')[0].trim();
+                  
+                  if (stateSpan) stateSpan.textContent = stateVal;
+                  if (districtSpan) districtSpan.textContent = districtVal;
+                } else {
+                  streetSpan.textContent = "Address Unavailable";
+                }
+              } catch (e) {
+                streetSpan.textContent = "Address Fetch Error";
+                console.error(e);
+              }
+            }
+          });
+        });
+
+        // Zoom map to fit filtered markers
+        if (boundsGroup.length > 0 && filterState !== "all") {
+          map.fitBounds(L.latLngBounds(boundsGroup), { padding: [50, 50] });
+        } else if (filterState === "all") {
+          map.setView([20.5937, 78.9629], 5);
+        }
+      } catch (err) {
+        console.error("Geospatial fetch failed:", err);
+      }
+    };
+
+    // Set up filter listener
+    const mapStateSelect = document.getElementById("mapStateSelect");
+    if (mapStateSelect) {
+      mapStateSelect.addEventListener("change", (e) => {
+        fetchHotspots(e.target.value);
+      });
+    }
+
+    // --- Interactive vis-network Fraud Graph Implementation ---
+    let networkInstance = null;
+    let graphInitialized = false;
+
+    const initFraudNetworkGraph = async () => {
+      if (graphInitialized) return;
+      graphInitialized = true;
+      await queryFraudNetwork("ACC0000002", 2);
+    };
+
+    const queryFraudNetwork = async (nodeId, depth) => {
+      const token = localStorage.getItem("token") || localStorage.getItem("access_token");
+      const loader = document.getElementById("graphLoader");
+      const statsRow = document.getElementById("graphStats");
+
+      if (loader) loader.style.display = "flex";
+
+      try {
+        const response = await fetch("http://localhost:8000/api/graph/query", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({ node_id: nodeId, depth: parseInt(depth) })
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.detail || "Query failed");
+        }
+
+        const result = await response.json();
+
+        // Render stats
+        if (statsRow) statsRow.style.display = "grid";
+        document.getElementById("statFraudRing").textContent = result.fraud_ring_detected ? "YES (MUTUAL)" : "NO";
+        document.getElementById("statFraudRing").style.color = result.fraud_ring_detected ? "var(--danger)" : "var(--safe)";
+        document.getElementById("statSuspiciousAmount").textContent = result.total_suspicious_amount.toFixed(0);
+        document.getElementById("statNodesCount").textContent = result.nodes.length;
+
+        // Map node properties for vis.js network
+        const visNodes = result.nodes.map(n => {
+          let color = "#2fbe8f"; // active/normal account/phone
+          let labelText = `${n.id}\n(${n.label})`;
+
+          if (n.is_fraudster) {
+            color = "#e5484d"; // flagged fraud node
+          } else if (n.label === "device") {
+            color = "#3e6fe0"; // device node
+          }
+
+          const tooltipLines = [];
+          tooltipLines.push(`ID: ${n.id}`);
+          tooltipLines.push(`Type: ${n.label}`);
+          tooltipLines.push(`Risk Score: ${n.fraud_score}`);
+          if (n.transaction_count !== undefined && n.transaction_count !== null && n.transaction_count > 0) {
+            tooltipLines.push(`Tx Count: ${n.transaction_count}`);
+          }
+          if (n.account_status && n.account_status !== "N/A" && n.account_status !== "undefined") {
+            tooltipLines.push(`Status: ${n.account_status}`);
+          }
+          if (n.bank && n.bank !== "N/A" && n.bank !== "undefined") {
+            tooltipLines.push(`Bank: ${n.bank}`);
+          }
+          if (n.jurisdiction && n.jurisdiction !== "N/A" && n.jurisdiction !== "undefined") {
+            tooltipLines.push(`Jurisdiction: ${n.jurisdiction}`);
+          }
+          if (n.fraud_rate !== undefined && n.fraud_rate !== null && n.fraud_rate > 0) {
+            tooltipLines.push(`Fraud Rate: ${n.fraud_rate}`);
+          }
+
+          return {
+            id: n.id,
+            label: labelText,
+            color: {
+              background: color,
+              border: "rgba(255, 255, 255, 0.2)",
+              highlight: { background: color, border: "var(--alert)" }
+            },
+            title: tooltipLines.join("\n"),
+            shape: n.label === "device" ? "database" : "dot",
+            size: n.label === "device" ? 18 : 14
+          };
+        });
+
+        // Map edge properties
+        const visEdges = result.edges.map(e => {
+          const isFlagged = e.flagged;
+          const edgeTooltipLines = [];
+          edgeTooltipLines.push(`Type: ${e.edge_type}`);
+          if (e.amount && e.amount > 0) {
+            edgeTooltipLines.push(`Amount: ₹${e.amount}`);
+          }
+          if (e.timestamp && e.timestamp !== "N/A" && e.timestamp !== "undefined") {
+            edgeTooltipLines.push(`Timestamp: ${e.timestamp}`);
+          }
+          edgeTooltipLines.push(`Flagged: ${isFlagged}`);
+
+          return {
+            from: e.source,
+            to: e.target,
+            label: e.edge_type,
+            color: {
+              color: isFlagged ? "#e5484d" : "rgba(230, 236, 248, 0.15)",
+              highlight: "var(--alert)",
+              hover: isFlagged ? "#e5484d" : "rgba(230, 236, 248, 0.25)"
+            },
+            width: isFlagged ? 2.5 : 1,
+            title: edgeTooltipLines.join("\n")
+          };
+        });
+
+        // Draw Vis Network Graph
+        const container = document.getElementById("interactiveNetwork");
+        if (container) {
+          const data = {
+            nodes: new vis.DataSet(visNodes),
+            edges: new vis.DataSet(visEdges)
+          };
+          const options = {
+            nodes: {
+              font: { color: "#edf1f7", size: 10, face: "Inter" },
+              borderWidth: 1.5,
+              shadow: true
+            },
+            edges: {
+              font: { color: "#8b93a7", size: 8, align: "middle", strokeWidth: 0 },
+              arrows: { to: { enabled: false } }
+            },
+            interaction: {
+              hover: true,
+              tooltipDelay: 100
+            },
+            physics: {
+              stabilization: { iterations: 100 },
+              barnesHut: {
+                gravitationalConstant: -1800,
+                springLength: 90,
+                springConstant: 0.04
+              }
+            }
+          };
+
+          if (networkInstance) {
+            networkInstance.destroy();
+          }
+          networkInstance = new vis.Network(container, data, options);
+        }
+
+      } catch (err) {
+        alert(`Graph Query Error: ${err.message}`);
+        console.error("Graph fetch failed:", err);
+      } finally {
+        if (loader) loader.style.display = "none";
+      }
+    };
+
+    // Set up Graph Query event listeners
+    const btnQueryGraph = document.getElementById("btnQueryGraph");
+    if (btnQueryGraph) {
+      btnQueryGraph.addEventListener("click", () => {
+        const nodeId = document.getElementById("graphNodeId").value.trim();
+        const depth = document.getElementById("graphDepth").value;
+        if (nodeId) {
+          queryFraudNetwork(nodeId, depth);
+        } else {
+          alert("Please enter a target node ID");
+        }
+      });
+    }
+
+    // Logout Handler
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("officer");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+
+</html>

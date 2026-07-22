@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Citizen Portal — SurakshaAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+      .page-card {
+        width: min(720px, 100%);
+        background: var(--surface);
+        border: 1px solid var(--line-strong);
+        border-radius: 18px;
+        padding: 32px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      .page-card h1 {
+        font-size: 34px;
+        color: #fff;
+        margin-top: 8px;
+      }
+      .page-card p {
+        color: var(--muted);
+        margin-top: 12px;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+      .page-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .page-badges span {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(47, 190, 143, 0.15);
+        color: var(--safe);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .back-link {
+        display: inline-block;
+        margin-top: 24px;
+        color: var(--safe);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-card">
+      <p class="eyebrow" style="color: var(--safe);">Citizen portal</p>
+      <h1>Citizen fraud shield</h1>
+      <p>This is the citizen-facing experience for SurakshaAI. It would include scam-checking flows, multilingual support, and guided reporting tools in a future full version.</p>
+      <div class="page-badges">
+        <span>Fraud check</span>
+        <span>Multilingual support</span>
+        <span>Guided report</span>
+        <span>Safe verdict</span>
+      </div>
+      <a class="back-link" href="Index.html">← Back to home</a>
+    </div>
+  </body>
+</html>

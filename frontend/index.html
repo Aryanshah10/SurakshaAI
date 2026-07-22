@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SurakshaAI — India's AI Shield Against Fraud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="nav-logo" href="#top" aria-label="SurakshaAI home">
+      <svg class="mark" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="12" stroke="#F2A93B" stroke-width="1.4" />
+        <circle cx="13" cy="13" r="7.5" stroke="#2FBE8F" stroke-width="1.4" />
+        <circle cx="13" cy="13" r="1.8" fill="#fff" />
+      </svg>
+      <span>SurakshaAI</span>
+    </a>
+
+    <button type="button" class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false"
+      aria-controls="navMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#citizen-portal">Citizen Portal</a>
+        <a href="#about">About Us</a>
+      </div>
+      <a href="login.html" class="nav-btn primary">Officer Log In</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+    </div>
+    <div class="wrap hero-content">
+      <div class="hero-top">
+        <span class="pulse-dot"></span>
+        <span class="eyebrow">Live national fraud intelligence network</span>
+      </div>
+      <h1>
+        Stop the scam <span class="accent">before</span><br />
+        the money moves.
+      </h1>
+      <p class="lede">
+        SurakshaAI brings together computer vision, graph intelligence, and speech AI in one
+        fast platform for citizens and officers.
+      </p>
+
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num safe">2.1M+</div>
+          <div class="stat-label">Calls screened / month</div>
+        </div>
+        <div>
+          <div class="stat-num alert">11,406</div>
+          <div class="stat-label">Active scam sessions flagged</div>
+        </div>
+        <div>
+          <div class="stat-num">12</div>
+          <div class="stat-label">Regional languages supported</div>
+        </div>
+        <div>
+          <div class="stat-num">28</div>
+          <div class="stat-label">States &amp; UTs connected</div>
+        </div>
+      </div>
+
+      <div class="fork">
+        <a href="#citizen-portal" class="fork-card citizen">
+          <div class="fork-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+          </div>
+          <span class="role-tag">Public access</span>
+          <h3>I'm a Citizen</h3>
+          <p>Get an instant verdict on a suspicious call, message, or payment request.</p>
+          <span class="go">Check a scam <span class="arrow">→</span></span>
+        </a>
+
+        <a href="login.html" class="fork-card officer">
+          <div class="fork-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 2l8 4v5c0 5.5-3.4 9.8-8 11-4.6-1.2-8-5.5-8-11V6l8-4z" />
+              <path d="M12 8v5" />
+              <circle cx="12" cy="15.5" r="0.6" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="role-tag">Restricted access · JWT</span>
+          <h3>I'm an Officer</h3>
+          <p>Open a live view of fraud patterns, geospatial alerts, and evidence graphs.</p>
+          <span class="go">Officer sign-in <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <section class="block" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" style="color: var(--safe);">01 · Flagship capabilities</span>
+        <h2>Five systems. One fraud picture.</h2>
+        <p>Every capability is connected to the same intelligence layer so the signal gets sharper everywhere.</p>
+      </div>
+      <div class="feat-grid">
+        <a href="#citizen-portal" class="feat-card">
+          <div class="tags"><span class="tag citizen">Citizen</span><span class="tag officer">Officer</span></div>
+          <h3>Digital Arrest Scam Detection</h3>
+          <p>Classify live call flows and scripts in real time to prevent transfer attempts before the money moves.</p>
+        </a>
+        <a href="#citizen-portal" class="feat-card">
+          <div class="tags"><span class="tag citizen">Citizen</span><span class="tag officer">Officer</span></div>
+          <h3>Counterfeit Currency Identification</h3>
+          <p>Use computer vision to check notes and verify security features instantly at the point of interaction.</p>
+        </a>
+        <a href="login.html" class="feat-card">
+          <div class="tags"><span class="tag officer">Officer</span></div>
+          <h3>Fraud Network Graph Intelligence</h3>
+          <p>Link accounts, devices, calls, and transactions into a visible fraud ring with cross-jurisdiction depth.
+          </p>
+        </a>
+        <a href="login.html" class="feat-card">
+          <div class="tags"><span class="tag officer">Officer</span></div>
+          <h3>Geospatial Crime Pattern Intelligence</h3>
+          <p>View hotspots and repeat-pattern clusters to guide patrol priorities and district-level action.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="citizen-portal">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <span class="eyebrow" style="color: var(--safe);">02 · Citizen portal</span>
+          <h2>Protect yourself before fraud happens.</h2>
+          <p class="about-text">
+            Verify suspicious calls, messages, payment requests, QR codes, and currency using AI. Get instant risk
+            analysis, clear guidance, and report fraud directly to help authorities prevent future cybercrime.
+          </p>
+          <div class="track-list">
+            <div class="track-item">
+              <span class="idx">01</span>
+              <div>
+                <h4>Instant Detection</h4>
+                <p>Analyze calls, screenshots, and payments within seconds.</p>
+              </div>
+            </div>
+            <div class="track-item">
+              <span class="idx">02</span>
+              <div>
+                <h4>Smart Guidance</h4>
+                <p>Know exactly what to do if a scam is detected.</p>
+              </div>
+            </div>
+          </div>
+          <a href="counterfeit.html" class="btn-citizen-cta">
+            Currency Counterfeit Detection
+            <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="split-visual">
+          <div class="phone-mock">
+            <div class="ph-head">
+              <div class="ph-avatar">S</div>
+              <div>
+                <div class="ph-name">SurakshaAI Assistant</div>
+                <div class="ph-status">● verified advisory source</div>
+              </div>
+            </div>
+            <div class="ph-chat-history" id="chatHistory">
+              <div class="bubble user">Someone asked for my Aadhaar details and said I will be arrested unless I stay on a video call.</div>
+              <div class="bubble bot"><span class="verdict">Confirmed scam · Digital arrest pattern</span>This matches a known fraud pattern. Hang up and report it using the official portal.</div>
+            </div>
+            <form class="ph-input-area" id="chatForm">
+              <input type="text" id="chatInput" placeholder="Verify messages or transcripts..." required />
+              <button type="submit" aria-label="Verify scam text">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" style="color: var(--safe);">03 · About us</span>
+        <h2>AI for a Safer Digital India.</h2>
+        <p>
+          SurakshaAI is an AI-powered cyber fraud detection platform that helps citizens identify scams while enabling
+          law enforcement to investigate fraud faster through intelligent analytics, fraud mapping, and connected
+          evidence.
+        </p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>🎯 Mission</h3>
+          <p>Protect citizens through fast, intelligent fraud detection.</p>
+        </div>
+        <div class="about-card">
+          <h3>🚔 Vision</h3>
+          <p>Support officers with real-time insights for quicker investigations.</p>
+        </div>
+        <div class="about-card">
+          <h3>🤖 Technology</h3>
+          <p>Powered by AI, Computer Vision, Speech Analysis, and Graph Intelligence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <svg class="mark" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="12" stroke="#F2A93B" stroke-width="1.4" />
+              <circle cx="13" cy="13" r="7.5" stroke="#2FBE8F" stroke-width="1.4" />
+              <circle cx="13" cy="13" r="1.8" fill="#fff" />
+            </svg>
+            <span>SurakshaAI</span>
+          </div>
+          <p>A concept fraud-intelligence platform connecting public guidance with officer-grade insight.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h5>Platform</h5>
+            <a href="#features">Features</a>
+            <a href="#citizen-portal">Citizen portal</a>
+            <a href="#about">About us</a>
+            <a href="login.html">Officer console</a>
+          </div>
+          <div class="footer-col">
+            <h5>Trust</h5>
+            <span>Guided public reporting</span>
+            <span>Secure officer access</span>
+            <span>Multi-language support</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>SURAKSHAAI — concept experience for demonstration</span>
+        <span>Made for a hackathon experience</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="authModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Close sign in dialog">×</button>
+      <p class="eyebrow">Choose your path</p>
+      <h3 id="modalTitle">Sign Up / Log In</h3>
+      <p class="modal-lede">
+        Select how you want to continue. Citizens get quick fraud guidance; officers access the secure command console.
+      </p>
+      <div class="modal-actions">
+        <a href="login.html" class="modal-option citizen">
+          <span class="modal-badge">Citizen</span>
+          <strong>Citizen Sign Up / Log In</strong>
+          <p>Check suspicious calls, messages, or payment requests and get guided next steps.</p>
+        </a>
+        <a href="login.html" class="modal-option officer">
+          <span class="modal-badge">Officer</span>
+          <strong>Officer Sign Up / Log In</strong>
+          <p>Access live fraud patterns, geospatial alerts, and evidence graphs with secure sign-in.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

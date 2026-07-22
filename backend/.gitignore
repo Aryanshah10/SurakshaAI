@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv
+/venv
+.venv/
+.env.example
+Currency_Dataset
+runs

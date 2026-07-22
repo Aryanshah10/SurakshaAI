@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counterfeit Currency Identification — SurakshaAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .scanner-container {
+      background: var(--surface-2);
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 28px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+    }
+
+    .scanner-body {
+      position: relative;
+      background: var(--surface-3);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .note-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      height: 240px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      margin: 0 auto;
+    }
+
+    .note-graphic {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      transition: all 0.3s ease;
+    }
+
+    /* Generic Banknote representation styling */
+    .note-details-generic {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1f2d3d 0%, #0d1b2a 100%);
+      color: var(--muted);
+      padding: 16px;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .note-val {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      font-size: 32px;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .note-title {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      font-family: var(--font-body);
+    }
+
+    .note-gandhi {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .note-gandhi::before {
+      content: 'Gandhi';
+      font-size: 11px;
+      font-family: var(--font-mono);
+      opacity: 0.7;
+    }
+
+    .note-thread {
+      position: absolute;
+      left: 36%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #2f9f7a 0%, #217357 50%, #2f9f7a 100%);
+      box-shadow: 0 0 8px rgba(47, 190, 143, 0.6);
+      transition: background 0.3s ease;
+    }
+
+    /* Scanner Laser animation line */
+    .scan-laser {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #2fbe8f;
+      box-shadow: 0 0 16px 4px rgba(47, 190, 143, 0.8);
+      z-index: 5;
+      top: 0;
+      display: none;
+    }
+
+    @keyframes laserMove {
+      0% {
+        top: 0%;
+      }
+
+      50% {
+        top: 100%;
+      }
+
+      100% {
+        top: 0%;
+      }
+    }
+
+    .note-viewport.scanning .scan-laser {
+      display: block;
+      animation: laserMove 2s infinite ease-in-out;
+    }
+
+    .scanner-controls {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-scan {
+      width: 100%;
+      padding: 12px;
+      background: var(--safe);
+      border: 1px solid var(--safe);
+      color: #080d17;
+      font-weight: 700;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+    }
+
+    .btn-scan:hover {
+      background: rgba(47, 190, 143, 0.85);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(47, 190, 143, 0.2);
+    }
+
+    .btn-scan:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .scan-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--surface-3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--safe);
+      border-radius: 3px;
+      transition: width 0.1s linear;
+    }
+
+    .progress-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .scan-results {
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .status-badge {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .status-badge.genuine {
+      background: rgba(47, 190, 143, 0.12);
+      color: var(--safe);
+      border: 1px solid rgba(47, 190, 143, 0.3);
+    }
+
+    .confidence {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .result-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .result-item .bullet {
+      color: var(--safe);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .result-item strong {
+      font-size: 14px;
+      color: var(--text);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .result-item p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="nav-logo" href="index.html" aria-label="SurakshaAI home">
+      <svg class="mark" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="12" stroke="#F2A93B" stroke-width="1.4" />
+        <circle cx="13" cy="13" r="7.5" stroke="#2FBE8F" stroke-width="1.4" />
+        <circle cx="13" cy="13" r="1.8" fill="#fff" />
+      </svg>
+      <span>SurakshaAI</span>
+    </a>
+
+    <button type="button" class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false"
+      aria-controls="navMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#citizen-portal">Citizen Portal</a>
+        <a href="index.html#about">About Us</a>
+      </div>
+      <a href="login.html" class="nav-btn primary">Officer Log In</a>
+    </div>
+  </nav>
+
+
+
+  <section class="block" id="counterfeit-section" style="margin-top: 80px;">
+    <div class="wrap" style="max-width: 780px;">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="eyebrow" style="color: var(--safe);">AI Vision Suite</span>
+        <h2 style="margin-top: 8px;">Counterfeit Currency Identification</h2>
+        <p class="about-text" style="margin-bottom: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Scan and verify banknotes using advanced computer vision. Our AI analyzes Mahatma Gandhi series
+          banknotes for watermarks, security thread color-shifting, microprinting, and latent images.
+        </p>
+      </div>
+
+          <!-- Interactive Scanner Interface -->
+          <div class="scanner-container">
+            <div class="scanner-body">
+              <div class="note-viewport" id="noteViewport" onclick="triggerNoteUpload()"
+                style="cursor: pointer; position: relative;">
+                <div class="scan-laser"></div>
+
+                <!-- Click placeholder prompt -->
+                <div id="uploadPrompt"
+                  style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(8, 13, 23, 0.7); z-index: 5; text-align: center; padding: 20px; transition: opacity 0.25s ease;">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--alert)" stroke-width="2"
+                    style="margin-bottom: 10px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <strong style="color: #fff; font-size: 13.5px; font-family: var(--font-body);">Click to Upload Note
+                    Image</strong>
+                  <span
+                    style="font-size: 10.5px; color: var(--muted); margin-top: 4px; font-family: var(--font-body);">Supports
+                    JPG, JPEG, PNG, or WEBP</span>
+                </div>
+
+                <div class="note-graphic" id="noteGraphic"
+                  style="width: 100%; height: 100%; transition: background 0.3s ease;">
+                  <div class="note-details-generic" id="noteDetailsGeneric">
+                    <span class="note-val">₹</span>
+                    <span class="note-title">RESERVE BANK OF INDIA</span>
+                    <div class="note-gandhi"></div>
+                    <div class="note-thread"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="scanner-controls">
+              <input type="file" id="noteImageInput" accept="image/jpeg,image/png,image/jpg,image/webp"
+                style="display: none;" onchange="handleNoteFileSelect(event)" />
+              <button type="button" class="btn-scan" id="btnScan" onclick="startScan()">Start AI Verification</button>
+              <div class="scan-progress" id="scanProgress" style="display: none;">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-status" id="progressStatus">Analyzing note...</span>
+              </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div class="scan-results" id="scanResults" style="display: none;">
+              <div class="result-header" id="resultHeader">
+                <!-- Rendered dynamically -->
+              </div>
+              <div class="result-list" id="resultList">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <svg class="mark" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="12" stroke="#F2A93B" stroke-width="1.4" />
+              <circle cx="13" cy="13" r="7.5" stroke="#2FBE8F" stroke-width="1.4" />
+              <circle cx="13" cy="13" r="1.8" fill="#fff" />
+            </svg>
+            <span>SurakshaAI</span>
+          </div>
+          <p>A concept fraud-intelligence platform connecting public guidance with officer-grade insight.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h5>Platform</h5>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#citizen-portal">Citizen portal</a>
+            <a href="index.html#about">About us</a>
+            <a href="login.html">Officer console</a>
+          </div>
+          <div class="footer-col">
+            <h5>Trust</h5>
+            <span>Guided public reporting</span>
+            <span>Secure officer access</span>
+            <span>Multi-language support</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>SURAKSHAAI — concept experience for demonstration</span>
+        <span>Made for a hackathon experience</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="authModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Close sign in dialog">×</button>
+      <p class="eyebrow">Choose your path</p>
+      <h3 id="modalTitle">Sign Up / Log In</h3>
+      <p class="modal-lede">
+        Select how you want to continue. Citizens get quick fraud guidance; officers access the secure command console.
+      </p>
+      <div class="modal-actions">
+        <a href="login.html" class="modal-option citizen">
+          <span class="modal-badge">Citizen</span>
+          <strong>Citizen Sign Up / Log In</strong>
+          <p>Check suspicious calls, messages, or payment requests and get guided next steps.</p>
+        </a>
+        <a href="login.html" class="modal-option officer">
+          <span class="modal-badge">Officer</span>
+          <strong>Officer Sign Up / Log In</strong>
+          <p>Access live fraud patterns, geospatial alerts, and evidence graphs with secure sign-in.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let uploadedNoteFile = null;
+
+    function triggerNoteUpload() {
+      if (document.getElementById('btnScan').disabled) return;
+      document.getElementById('noteImageInput').click();
+    }
+
+    function handleNoteFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      uploadedNoteFile = file;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const noteGraphic = document.getElementById('noteGraphic');
+        noteGraphic.style.backgroundImage = `url(${e.target.result})`;
+        noteGraphic.style.backgroundSize = 'contain';
+        noteGraphic.style.backgroundPosition = 'center';
+        noteGraphic.style.backgroundRepeat = 'no-repeat';
+
+        // Dim placeholder overlays
+        const gen = document.getElementById('noteDetailsGeneric');
+        if (gen) gen.style.opacity = '0.04';
+        document.getElementById('uploadPrompt').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('uploadPrompt').style.display = 'none';
+        }, 250);
+      };
+      reader.readAsDataURL(file);
+
+      document.getElementById('scanResults').style.display = 'none';
+    }
+
+    function startScan() {
+      if (!uploadedNoteFile) {
+        alert("Please upload a banknote image first by clicking on the scanner viewport area!");
+        triggerNoteUpload();
+        return;
+      }
+
+      const btnScan = document.getElementById('btnScan');
+      const scanProgress = document.getElementById('scanProgress');
+      const progressFill = document.getElementById('progressFill');
+      const progressStatus = document.getElementById('progressStatus');
+      const scanResults = document.getElementById('scanResults');
+      const noteViewport = document.getElementById('noteViewport');
+
+      btnScan.disabled = true;
+      scanResults.style.display = 'none';
+      scanProgress.style.display = 'block';
+      progressFill.style.width = '0%';
+      noteViewport.classList.add('scanning');
+
+      let progress = 0;
+      const stages = [
+        { threshold: 25, label: "Extracting RGB channels and UV fluorescence spectra..." },
+        { threshold: 55, label: "Analyzing watermark alignment indexes..." },
+        { threshold: 85, label: "Verifying security thread micro-inscriptions..." },
+        { threshold: 100, label: "Scan complete!" }
+      ];
+
+      let scanData = null;
+      let apiError = null;
+
+      const formData = new FormData();
+      formData.append('file', uploadedNoteFile);
+
+      fetch('http://localhost:8000/api/currency/scan', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => {
+          if (!res.ok) return res.text().then(t => { throw new Error(t); });
+          return res.json();
+        })
+        .then(data => {
+          scanData = data;
+        })
+        .catch(err => {
+          console.error('[scan] API error:', err);
+          apiError = err.message;
+        });
+
+      const interval = setInterval(() => {
+        if (progress >= 90 && !scanData && !apiError) {
+          return;
+        }
+
+        progress += 2;
+        progressFill.style.width = `${progress}%`;
+
+        const currentStage = stages.find(s => progress <= s.threshold);
+        if (currentStage) {
+          progressStatus.textContent = currentStage.label;
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          noteViewport.classList.remove('scanning');
+          scanProgress.style.display = 'none';
+          btnScan.disabled = false;
+
+          if (apiError) {
+            alert("Unable to complete AI check. Falling back to offline advisory. Helpline: 1930");
+            return;
+          }
+
+          const resultHeader = document.getElementById("resultHeader");
+          const resultList = document.getElementById("resultList");
+
+          if (scanData.is_genuine) {
+            resultHeader.innerHTML = `
+                <span class="status-badge genuine">● VERIFIED GENUINE</span>
+                <span class="confidence">${(scanData.confidence * 100).toFixed(0)}% Match</span>
+              `;
+            resultList.innerHTML = `
+                <div class="result-item">
+                  <span class="bullet" style="color: var(--safe); font-weight: bold; margin-right: 8px;">✓</span>
+                  <div>
+                    <strong>Security Verification Passed</strong>
+                    <p>Verified Mahatma Gandhi watermark alignment profile, optically variable ink (OVI) security thread color parameters, and microtext details.</p>
+                  </div>
+                </div>
+                <div class="result-item">
+                  <span class="bullet" style="color: var(--safe); font-weight: bold; margin-right: 8px;">✓</span>
+                  <div>
+                    <strong>Fluorescence Profile</strong>
+                    <p>${scanData.uv_simulation_note}</p>
+                  </div>
+                </div>
+              `;
+          } else {
+            resultHeader.innerHTML = `
+                <span class="status-badge counterfeit" style="background: rgba(229, 72, 77, 0.15); color: var(--danger); border: 1px solid rgba(229, 72, 77, 0.35);">● FLAGGED SUSPECT / COUNTERFEIT</span>
+                <span class="confidence" style="color: var(--danger); font-weight: bold;">${(scanData.confidence * 100).toFixed(0)}% Match</span>
+              `;
+
+            let flagItemsHtml = scanData.red_flags.map(flag => `
+                <div class="result-item">
+                  <span class="bullet" style="color: var(--danger); font-weight: bold; margin-right: 8px;">✗</span>
+                  <div>
+                    <strong>Security Red Flag Mapped</strong>
+                    <p style="color: var(--danger); margin: 2px 0 0;">${flag}</p>
+                  </div>
+                </div>
+              `).join('');
+
+            resultList.innerHTML = `
+                ${flagItemsHtml}
+                <div class="result-item">
+                  <span class="bullet" style="color: var(--danger); font-weight: bold; margin-right: 8px;">✗</span>
+                  <div>
+                    <strong>Fluorescence Pattern Warning</strong>
+                    <p>${scanData.uv_simulation_note}</p>
+                  </div>
+                </div>
+              `;
+          }
+
+          scanResults.style.display = 'block';
+        }
+      }, 50);
+    }
+  </script>
+</body>
+
+</html>

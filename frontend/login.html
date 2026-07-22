@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In — SurakshaAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="login-page">
+    <div class="login-bg">
+      <div class="hero-grid"></div>
+    </div>
+
+    <main class="login-shell">
+      <a class="nav-logo login-brand" href="index.html" aria-label="Back to SurakshaAI home">
+        <svg class="mark" viewBox="0 0 26 26" fill="none">
+          <circle cx="13" cy="13" r="12" stroke="#F2A93B" stroke-width="1.4" />
+          <circle cx="13" cy="13" r="7.5" stroke="#2FBE8F" stroke-width="1.4" />
+          <circle cx="13" cy="13" r="1.8" fill="#fff" />
+        </svg>
+        <span>SurakshaAI</span>
+      </a>
+
+      <section class="login-card" aria-labelledby="loginTitle">
+        <p class="eyebrow">Secure access</p>
+        <h1 id="loginTitle">Sign In</h1>
+        <p class="login-lede">
+          Enter your credentials to access the SurakshaAI dashboard. Credentials are verified server-side only.
+        </p>
+
+        <form id="loginForm" class="login-form" novalidate>
+          <div class="form-field">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              required
+              placeholder="Enter username"
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              required
+              placeholder="Enter password"
+            />
+          </div>
+
+          <p id="loginError" class="login-message error" role="alert" hidden></p>
+          <p id="loginSuccess" class="login-message success" role="status" hidden></p>
+
+          <button type="submit" class="login-submit" id="loginSubmit">Sign In</button>
+        </form>
+
+        <p class="login-footer-note">
+          <a href="index.html">← Back to home</a>
+        </p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

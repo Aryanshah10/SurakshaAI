@@ -1,0 +1,1238 @@
+[
+  {
+    "id": "chunk_002",
+    "text": "# CERT-In Advisory: Digital Arrest Scams CERT-In, India's national nodal agency for responding to cybersecurity incidents, has issued a public advisory warning citizens about \"digital arrest\" scams — one of the fastest-growing cyber frauds in the country. In this scam, fraudsters impersonate officials from agencies such as the CBI, local police, the Enforcement Directorate (ED), Customs, or even judges, and contact victims through phone calls, video calls, or messages on platforms like WhatsApp and Skype.",
+    "metadata": {
+      "file": "01_cert-in_digital-arrest-advisory.md",
+      "word_count": 75,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Digital Arrest Scam",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_003",
+    "text": "The scam typically follows a fixed pattern. The victim receives a call claiming they are under investigation for a serious crime — commonly money laundering, drug trafficking, or a parcel containing illegal items seized in their name. The caller pressures the victim to stay on a video call continuously, sometimes for several hours or even days, calling this a \"digital arrest.\" Victims are shown fake arrest warrants, fake ID cards, and staged police-station-like backgrounds to appear legitimate. They are told they cannot contact family, lawyers, or anyone else during this period, and are coerced into transferring money — often framed as \"bail,\" \"security deposit,\" or \"verification fees\" — to accounts controlled by the scammers.",
+    "metadata": {
+      "file": "01_cert-in_digital-arrest-advisory.md",
+      "word_count": 114,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Digital Arrest Scam",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_004",
+    "text": "CERT-In's core message to citizens is direct: no government agency in India conducts arrests, investigations, or demands money through a phone call or video call. Legitimate law enforcement follows physical, documented procedures — not remote video \"custody.\"",
+    "metadata": {
+      "file": "01_cert-in_digital-arrest-advisory.md",
+      "word_count": 37,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Digital Arrest Scam",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_005",
+    "text": "**Key guidance from the advisory:**\n- Do not panic. Genuine agencies never pressure for instant decisions or payments.\n- Verify independently — hang up and call the concerned department directly using officially published numbers, not numbers given by the caller.\n- Never share OTPs, bank details, or Aadhaar/PAN information over an unsolicited call.\n- Do not install any screen-sharing or remote-access app (AnyDesk, TeamViewer, Quick Support) at a caller's request.\n- Take a screenshot or recording of the call if possible, for evidence.\n- Report immediately via the national cybercrime helpline **1930** or online at **cybercrime.gov.in**.",
+    "metadata": {
+      "file": "01_cert-in_digital-arrest-advisory.md",
+      "word_count": 96,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Digital Arrest Scam",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_006",
+    "text": "The Ministry of Home Affairs has echoed this, noting that the Indian Cyber Crime Coordination Centre (I4C) recorded over ₹120 crore in losses from digital arrest scams between January and April 2024 alone, with the scale increasing since. Many of these operations have been traced to call centres based outside India, particularly in Southeast Asia, making cross-border coordination a key part of the government's response.",
+    "metadata": {
+      "file": "01_cert-in_digital-arrest-advisory.md",
+      "word_count": 65,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Digital Arrest Scam",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_007",
+    "text": "**RAG relevance:** This file supports queries like \"what is digital arrest,\" \"is CBI calling me on video real,\" \"what should I do if someone threatens arrest over a call,\" and \"how to verify a government caller.\"",
+    "metadata": {
+      "file": "01_cert-in_digital-arrest-advisory.md",
+      "word_count": 36,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Digital Arrest Scam",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_009",
+    "text": "# RBI Guidelines and Notifications: UPI & OTP Fraud\n\nThe Reserve Bank of India regularly issues directions and public notifications addressing fraud in digital payment channels, including UPI, mobile banking, and card transactions. Digital payment fraud has grown sharply alongside UPI adoption — banking and payments data referenced in RBI's Annual Report show digital payment fraud cases running into thousands annually, with hundreds of crores in losses, and UPI-specific fraud cases crossing over ten lakh complaints in recent financial years.",
+    "metadata": {
+      "file": "02_rbi_upi-otp-fraud-notification.md",
+      "word_count": 80,
+      "source": "Reserve Bank of India (RBI)",
+      "topic": "UPI Fraud / OTP Fraud",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_010",
+    "text": "**How UPI/OTP fraud typically works:** 1. **Phishing links** — victims get an SMS/WhatsApp/email pretending to be from their bank or UPI app, warning of an account issue, with a link that captures UPI PIN, OTP, or card details on a fake page.\n2. **Fake customer care numbers** — victims search online for a bank's helpline, find a fraudulent number in search results, and are talked into installing screen-sharing apps or revealing OTPs.\n3. **Fake collect requests** — the victim receives a UPI \"collect request\" disguised as a refund or cashback; approving it and entering the PIN actually authorises an outgoing payment.\n4. **QR code fraud** — a scammer swaps a shop's legitimate QR sticker with their own, redirecting customer payments to themselves.\n5. **Remote-access app fraud** — someone posing as bank/KYC support asks the victim to install AnyDesk or similar tools \"to fix an issue,\" then watches the screen and captures OTP/PIN in real time.",
+    "metadata": {
+      "file": "02_rbi_upi-otp-fraud-notification.md",
+      "word_count": 155,
+      "source": "Reserve Bank of India (RBI)",
+      "topic": "UPI Fraud / OTP Fraud",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_011",
+    "text": "**RBI's core rule, repeated across advisories:** the UPI PIN is required only to *send* money, never to *receive* it. Any call, SMS, QR code, or app requesting PIN entry to \"receive\" a payment, refund, or prize is fraud by definition. Similarly, OTPs authenticate transactions the customer initiates — a bank will never call and ask a customer to read out an OTP.\n\nRBI has also been strengthening the regulatory framework: draft amendment directions proposed in 2026 clarify that transactions made using a customer's own OTP/PIN are generally treated as \"authorised,\" but transactions where a customer was deceived or coerced into authorising a payment can still be classified as fraudulent, shifting some liability protections toward the customer. Banks are required to maintain fraud-monitoring systems, send timely alerts, and provide accessible complaint channels.",
+    "metadata": {
+      "file": "02_rbi_upi-otp-fraud-notification.md",
+      "word_count": 131,
+      "source": "Reserve Bank of India (RBI)",
+      "topic": "UPI Fraud / OTP Fraud",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_012",
+    "text": "**What to do if defrauded:**\n- Contact your bank's 24×7 fraud helpline immediately to attempt a transaction block/reversal.\n- File a complaint on **cybercrime.gov.in** or call the national helpline **1930** — early reporting (within a few hours) significantly increases the chance of recovering funds before withdrawal.\n- Never share your UPI PIN, OTP, CVV, or net-banking password with anyone, including people claiming to be bank staff.",
+    "metadata": {
+      "file": "02_rbi_upi-otp-fraud-notification.md",
+      "word_count": 66,
+      "source": "Reserve Bank of India (RBI)",
+      "topic": "UPI Fraud / OTP Fraud",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_013",
+    "text": "**RAG relevance:** Supports queries like \"is this UPI request genuine,\" \"why is RBI asking for two-factor authentication,\" \"what to do after sharing OTP by mistake,\" \"how to report UPI fraud.\"",
+    "metadata": {
+      "file": "02_rbi_upi-otp-fraud-notification.md",
+      "word_count": 30,
+      "source": "Reserve Bank of India (RBI)",
+      "topic": "UPI Fraud / OTP Fraud",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_015",
+    "text": "# cybercrime.gov.in: Reporting Fake CBI/ED/Police Calls\n\nThe National Cyber Crime Reporting Portal, run under the Ministry of Home Affairs' Indian Cyber Crime Coordination Centre (I4C), is the official government channel for citizens to report impersonation scams involving fake CBI, ED, Customs, or police calls, alongside all other categories of cybercrime.",
+    "metadata": {
+      "file": "03_cybercrime-gov-in_fake-cbi-ed-calls.md",
+      "word_count": 50,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Fake CBI/ED/Police Impersonation Calls",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_016",
+    "text": "**How the impersonation call scam plays out:**\nA citizen receives an unexpected call, often from a spoofed number that appears to be an official government line. The caller claims to be a CBI officer, ED official, customs officer, or police inspector, and states that the victim's name, Aadhaar number, phone number, or a courier parcel addressed to them is linked to an illegal activity — commonly drug trafficking, money laundering, or a fake passport/SIM card racket. To appear credible, callers may email or WhatsApp forged documents: fake FIRs, arrest warrants, or ID cards bearing official-looking emblems. Some escalate to video calls where the scammer sits in front of a fake \"police station\" backdrop, sometimes even wearing a uniform.",
+    "metadata": {
+      "file": "03_cybercrime-gov-in_fake-cbi-ed-calls.md",
+      "word_count": 118,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Fake CBI/ED/Police Impersonation Calls",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_017",
+    "text": "The victim is told they must cooperate immediately and secretly — no contact with family, friends, or lawyers — or face arrest. Fear and urgency are used deliberately to prevent the victim from pausing to verify the claim. The call may last hours, sometimes over multiple days, before the victim is pressured into transferring money framed as a \"refundable security deposit\" or \"verification charge\" to escape prosecution.",
+    "metadata": {
+      "file": "03_cybercrime-gov-in_fake-cbi-ed-calls.md",
+      "word_count": 67,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Fake CBI/ED/Police Impersonation Calls",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_018",
+    "text": "**Real government agencies do not do this.** No investigation, arrest, or bail process in India is conducted through a phone or video call. CBI, ED, police, and courts communicate through official written notices and require physical appearance, not remote video \"custody.\"",
+    "metadata": {
+      "file": "03_cybercrime-gov-in_fake-cbi-ed-calls.md",
+      "word_count": 41,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Fake CBI/ED/Police Impersonation Calls",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_019",
+    "text": "**Steps recommended by cybercrime.gov.in / I4C:**\n1. Disconnect the call. Do not argue or negotiate.\n2. Independently verify by contacting the concerned agency through numbers listed on its official website — never the number the caller provided.\n3. Do not share OTP, bank details, or personal identity documents over the call.\n4. Report the incident on cybercrime.gov.in under the \"Report & Track\" section, or call the toll-free helpline **1930** — ideally within a few hours, since faster reporting improves the chance of the receiving bank account being frozen before withdrawal.\n5. Use the portal's \"Suspect Repository\" tool to check if a phone number, email, or bank account has already been flagged by other victims.\n\nThe portal also allows citizens to register as cyber volunteers to help flag unlawful content, and provides complaint-status tracking for cases already filed.",
+    "metadata": {
+      "file": "03_cybercrime-gov-in_fake-cbi-ed-calls.md",
+      "word_count": 137,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Fake CBI/ED/Police Impersonation Calls",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_020",
+    "text": "**RAG relevance:** Supports queries like \"someone called claiming to be CBI, what do I do,\" \"how to report a scam call,\" \"is this arrest warrant real,\" \"how to check if a number is a known scammer.\"",
+    "metadata": {
+      "file": "03_cybercrime-gov-in_fake-cbi-ed-calls.md",
+      "word_count": 36,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Fake CBI/ED/Police Impersonation Calls",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_022",
+    "text": "# NCRB Data: Cybercrime and Digital Fraud Trends in India\n\nThe National Crime Records Bureau compiles and publishes India's official crime statistics, including a dedicated cybercrime category that has shown a sharp and sustained upward trend over the past several years. NCRB figures show cybercrime cases climbing from roughly 65,000 in 2022 to over 86,000 in 2023, with fraud and cheating-related offences making up a significant share of the total. Complementary data from the National Cybercrime Reporting Portal (a system linked to NCRB and I4C) shows complaint volumes rising even faster — from around 4.5 lakh complaints in 2021 to well over 7 lakh complaints in just the first several months of later years, reflecting both a genuine rise in fraud and improved public awareness of where to report it.",
+    "metadata": {
+      "file": "04_ncrb_cybercrime-fraud-statistics.md",
+      "word_count": 130,
+      "source": "National Crime Records Bureau (NCRB)",
+      "topic": "Cybercrime & Digital Fraud Statistics",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_023",
+    "text": "**Why this data matters for a RAG/fraud-detection system:**\nNCRB statistics are useful less for individual scam scripts and more for establishing scale, trend direction, and where enforcement is concentrated — useful context when an AI agent needs to explain *why* a particular type of fraud alert is being raised, or when generating law-enforcement-facing dashboards (as required in problem statements involving crime pattern intelligence).",
+    "metadata": {
+      "file": "04_ncrb_cybercrime-fraud-statistics.md",
+      "word_count": 63,
+      "source": "National Crime Records Bureau (NCRB)",
+      "topic": "Cybercrime & Digital Fraud Statistics",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_024",
+    "text": "**Key patterns visible in NCRB and related I4C data:**\n- Financial fraud (UPI fraud, digital arrest, loan-app scams, investment scams) makes up the largest and fastest-growing share of cybercrime complaints, ahead of categories like hacking or data theft.\n- A large proportion of high-value fraud — cases running into lakhs or crores per victim — is concentrated in impersonation scams (fake CBI/ED/police, digital arrest) and screen-sharing/remote-access UPI fraud, rather than simple phishing.\n- Elderly and retired citizens are disproportionately represented among high-loss victims, largely because scam scripts exploit unfamiliarity with digital banking combined with fear of authority.\n- A significant share of large-scale fraud operations have been traced to call centres operating outside India's borders, particularly in parts of Southeast Asia, which complicates direct law-enforcement action and has pushed responses toward account-freezing, SIM-blocking, and telecom-level interventions (blocking of spoofed numbers, suspicious IMEIs) rather than only arrests.\n- Reporting speed strongly affects recovery: complaints filed within the first few hours through the 1930 helpline or cybercrime.gov.in have a meaningfully higher chance of the destination bank account being frozen before funds are withdrawn.",
+    "metadata": {
+      "file": "04_ncrb_cybercrime-fraud-statistics.md",
+      "word_count": 181,
+      "source": "National Crime Records Bureau (NCRB)",
+      "topic": "Cybercrime & Digital Fraud Statistics",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_025",
+    "text": "**Caveat for your project:** NCRB's official published reports typically lag by a year or more (the most recent full official crime report is usually 1–2 years behind the current year), so for very recent monthly/quarterly numbers, cross-reference with I4C press releases or Ministry of Home Affairs statements rather than treating NCRB as the most current source.",
+    "metadata": {
+      "file": "04_ncrb_cybercrime-fraud-statistics.md",
+      "word_count": 56,
+      "source": "National Crime Records Bureau (NCRB)",
+      "topic": "Cybercrime & Digital Fraud Statistics",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_026",
+    "text": "**RAG relevance:** Supports queries like \"how common is digital arrest fraud,\" \"which age group is most affected by cyber fraud,\" \"where do these scam calls originate,\" \"how fast should I report fraud to recover money.\"",
+    "metadata": {
+      "file": "04_ncrb_cybercrime-fraud-statistics.md",
+      "word_count": 35,
+      "source": "National Crime Records Bureau (NCRB)",
+      "topic": "Cybercrime & Digital Fraud Statistics",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_028",
+    "text": "# CERT-In Guidance: UPI Fraud and Phishing Scams\n\nCERT-In's public awareness materials, including its \"Secure Our World\" citizen booklet, treat phishing as the entry point for most financial fraud in India, including UPI-linked scams. Phishing is defined as any attempt to trick a user into revealing sensitive information — UPI PIN, OTP, net-banking password, card CVV — through a fake message, email, or website designed to imitate a trusted brand such as a bank, UPI app, or e-commerce platform.",
+    "metadata": {
+      "file": "05_cert-in_upi-phishing-scams.md",
+      "word_count": 79,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "UPI Fraud & Phishing Scams",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_029",
+    "text": "**Common phishing-to-UPI-fraud chain observed by CERT-In:**\n1. Victim receives an SMS/WhatsApp message with a link, warning of a KYC expiry, account block, or a too-good discount.\n2. The link opens a page visually identical to a bank or UPI app login screen.\n3. The victim enters UPI PIN or OTP believing they are \"verifying\" their account.\n4. The credentials are captured instantly and used to authorise a fraudulent transaction, often within minutes.\n\nCERT-In advisories have also flagged a related but distinct pattern: **fake e-commerce domains** that surge during festive sales (Diwali, Dussehra), mimicking major platforms like Amazon or Flipkart with near-identical URLs to collect payment details for orders that are never fulfilled.",
+    "metadata": {
+      "file": "05_cert-in_upi-phishing-scams.md",
+      "word_count": 112,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "UPI Fraud & Phishing Scams",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_030",
+    "text": "**CERT-In's recommended precautions:**\n- Never click payment or \"verify KYC\" links received via SMS or WhatsApp — go to the bank/app directly by typing the official URL or opening the app.\n- Check the sender ID and URL carefully; look for subtle misspellings (e.g., \"arnaz0n\" instead of \"amazon\").\n- Enable two-factor authentication wherever available and avoid relying only on SMS-based OTP where a stronger option exists.\n- Report suspected phishing pages to CERT-In and to the hosting bank so the fraudulent domain can be taken down.\n- Never make a payment or share an OTP just because a message conveys urgency (\"act within 10 minutes or account will be blocked\") — this pressure is itself a red flag.",
+    "metadata": {
+      "file": "05_cert-in_upi-phishing-scams.md",
+      "word_count": 118,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "UPI Fraud & Phishing Scams",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_031",
+    "text": "CERT-In coordinates with the Cyber Swachhta Kendra (Botnet Cleaning and Malware Analysis Centre) to identify malicious domains and infected devices at scale, and works with the Indian Cyber Crime Coordination Centre (I4C) on citizen-facing awareness campaigns, particularly around high-fraud periods like festival shopping seasons.",
+    "metadata": {
+      "file": "05_cert-in_upi-phishing-scams.md",
+      "word_count": 44,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "UPI Fraud & Phishing Scams",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_032",
+    "text": "**RAG relevance:** Supports queries like \"is this bank SMS real,\" \"how to spot a fake shopping website,\" \"why does this link look like my bank's site,\" \"what to do if I entered my UPI PIN on a suspicious page.\"",
+    "metadata": {
+      "file": "05_cert-in_upi-phishing-scams.md",
+      "word_count": 39,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "UPI Fraud & Phishing Scams",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_034",
+    "text": "# CERT-In Guidance: OTP Fraud and SIM Swap Attacks\n\nCERT-In classifies OTP-based fraud as a category distinct from simple phishing, because it typically involves direct voice contact rather than just a fake link. In a standard OTP fraud call, the scammer already possesses partial information about the victim — a bank name, the last four digits of a card, or a recent transaction — often obtained from a prior data leak, and uses this partial legitimacy to convince the victim that the call is genuinely from their bank.",
+    "metadata": {
+      "file": "06_cert-in_otp-fraud-sim-swap.md",
+      "word_count": 88,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "OTP Fraud & SIM Swap",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_035",
+    "text": "**SIM swap fraud** is a related but more severe attack chain that CERT-In and telecom regulators have both flagged. Here, the fraudster first collects enough personal information (through phishing, social engineering, or a leaked database) to impersonate the victim at a telecom store or through a fraudulent online request, and convinces the operator to issue a duplicate SIM card or port the victim's number. Once the swap succeeds, the victim's original SIM stops working (\"No Service\" showing on the phone), and all OTPs and bank alerts are silently redirected to the fraudster's device — allowing them to reset banking passwords and drain accounts without the victim noticing until money is already gone.",
+    "metadata": {
+      "file": "06_cert-in_otp-fraud-sim-swap.md",
+      "word_count": 112,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "OTP Fraud & SIM Swap",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_036",
+    "text": "**Warning signs CERT-In highlights:**\n- A call, SMS, or email asking directly for an OTP — no legitimate bank, UPI app, or government office ever asks for an OTP over a call.\n- Sudden loss of mobile network signal with no explanation, especially after receiving suspicious calls or messages about SIM upgrade/replacement.\n- Unexpected \"your SIM will be deactivated\" messages urging you to share an OTP to \"retain\" the number.",
+    "metadata": {
+      "file": "06_cert-in_otp-fraud-sim-swap.md",
+      "word_count": 70,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "OTP Fraud & SIM Swap",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_037",
+    "text": "**Precautionary steps:**\n- Never share an OTP verbally or via text, regardless of who is asking or how urgent it sounds.\n- If your phone shows \"No Service\" unexpectedly for an extended period, contact your telecom provider immediately from another line to check for unauthorised SIM changes.\n- Register for SMS/email alerts on all bank accounts so a silent SIM swap is caught by a missed transaction alert.\n- Use app-based authenticators instead of SMS OTP where the bank/platform supports it, since SIM swap cannot intercept those.\n- Report immediately to your bank and to the telecom operator, and file a complaint at cybercrime.gov.in or via the 1930 helpline.",
+    "metadata": {
+      "file": "06_cert-in_otp-fraud-sim-swap.md",
+      "word_count": 109,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "OTP Fraud & SIM Swap",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_038",
+    "text": "**RAG relevance:** Supports queries like \"why did my phone suddenly lose signal,\" \"someone is asking for my OTP, is it a scam,\" \"what is SIM swap fraud,\" \"how to protect against SIM cloning.\"",
+    "metadata": {
+      "file": "06_cert-in_otp-fraud-sim-swap.md",
+      "word_count": 33,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "OTP Fraud & SIM Swap",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_040",
+    "text": "# CERT-In Guidance: Remote Access / Screen-Sharing App Fraud\n\nRemote access fraud is among the most damaging categories of digital payment fraud tracked by CERT-In and NPCI, because it defeats almost every standard security check — the fraudster does not need to guess a password or intercept an OTP; they simply watch the victim enter it.",
+    "metadata": {
+      "file": "07_cert-in_remote-access-app-fraud.md",
+      "word_count": 56,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Remote Access App Fraud (Screen Sharing Scams)",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_041",
+    "text": "**How the scam is executed:**\nA caller poses as a bank representative, UPI app support agent, or even a government official, claiming there is an urgent problem — a failed transaction needing a refund, a KYC update, or account suspension risk. To \"resolve\" the issue, the victim is guided step-by-step to download a legitimate but repurposed remote-access application such as AnyDesk, TeamViewer, or Quick Support from the Play Store, and to share the unique ID/code it generates. Once connected, the scammer can see everything on the victim's screen in real time — including UPI PINs, OTPs, and net-banking credentials as they are typed — and can also directly control the device to initiate transactions themselves.",
+    "metadata": {
+      "file": "07_cert-in_remote-access-app-fraud.md",
+      "word_count": 115,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Remote Access App Fraud (Screen Sharing Scams)",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_042",
+    "text": "This method is frequently combined with other scam types: it is used inside digital arrest scams (to \"verify\" bank balance), inside fake customer-care scams (to \"process a refund\"), and inside fake courier/parcel scams. The common thread is always the same — a legitimate-sounding reason to install a screen-sharing tool.",
+    "metadata": {
+      "file": "07_cert-in_remote-access-app-fraud.md",
+      "word_count": 49,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Remote Access App Fraud (Screen Sharing Scams)",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_043",
+    "text": "**CERT-In's core guidance:**\n- No genuine bank, UPI provider, or government department will ever ask a customer to install a remote-access or screen-sharing app.\n- Refunds, KYC updates, and account verifications never require screen sharing — they happen automatically or through the bank's own app/branch.\n- If a call insists on installing AnyDesk/TeamViewer/Quick Support, treat it as a certain scam and disconnect immediately.\n- If such an app has already been installed and shared, uninstall it immediately, turn off mobile data/Wi-Fi to cut the live connection, and contact the bank to freeze the account before making any further checks.\n- Report the incident at cybercrime.gov.in or call 1930 as soon as possible — recovery chances drop sharply after the first few hours.",
+    "metadata": {
+      "file": "07_cert-in_remote-access-app-fraud.md",
+      "word_count": 122,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Remote Access App Fraud (Screen Sharing Scams)",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_044",
+    "text": "**RAG relevance:** Supports queries like \"someone asked me to install AnyDesk, is it safe,\" \"what is screen-sharing fraud,\" \"I shared my screen with a caller, what should I do now,\" \"how do refund scams use remote access apps.\"",
+    "metadata": {
+      "file": "07_cert-in_remote-access-app-fraud.md",
+      "word_count": 38,
+      "source": "CERT-In (Indian Computer Emergency Response Team)",
+      "topic": "Remote Access App Fraud (Screen Sharing Scams)",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_046",
+    "text": "# CERT-In / I4C Guidance: Fake Loan App Fraud\n\nFake instant-loan apps represent a distinct fraud category that CERT-In and the Indian Cyber Crime Coordination Centre (I4C) have flagged as both a financial crime and, in several documented cases, a driver of serious psychological harm to victims. I4C reported taking down 379 illegal lending apps between October 2023 and May 2024 alone, and over 1,100 such apps have been removed from Indian app stores since 2021 — yet new ones continue to appear.",
+    "metadata": {
+      "file": "08_cert-in-i4c_fake-loan-app-fraud.md",
+      "word_count": 83,
+      "source": "CERT-In (Indian Computer Emergency Response Team) / I4C",
+      "topic": "Fake Loan App Fraud",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_047",
+    "text": "**How the scam operates:**\nAds for \"instant personal loans\" circulate on social media (Instagram, Facebook, WhatsApp), promising quick disbursal with minimal documentation. Once a user installs the app and applies, it requests permissions far beyond what a loan requires — full access to contacts, photo gallery, camera, and SMS. The app disburses only a fraction of the amount applied for (deducting the rest as unexplained \"processing fees\" or \"insurance\"), while demanding full repayment, often within 7 days and at extremely high effective interest rates. When the borrower cannot repay on time, the operators use the harvested contact list to send threatening or morphed messages to the victim's family, friends, and employer, pressuring rapid repayment through humiliation. Several extreme cases in India have led to victims taking their own lives after sustained harassment.",
+    "metadata": {
+      "file": "08_cert-in-i4c_fake-loan-app-fraud.md",
+      "word_count": 132,
+      "source": "CERT-In (Indian Computer Emergency Response Team) / I4C",
+      "topic": "Fake Loan App Fraud",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_048",
+    "text": "**Red flags to identify a fake loan app:**\n- No RBI registration or NBFC licensing (genuine digital lenders must be listed with the RBI).\n- Requests permission to access contacts, gallery, or SMS — a legitimate lender never needs this.\n- No verifiable physical office address or working customer care number.\n- Loan approved with no documentation checks, unrealistically low interest, and instant disbursal.\n- Repayment window unusually short (days rather than weeks/months) with steep penalty structures.",
+    "metadata": {
+      "file": "08_cert-in-i4c_fake-loan-app-fraud.md",
+      "word_count": 77,
+      "source": "CERT-In (Indian Computer Emergency Response Team) / I4C",
+      "topic": "Fake Loan App Fraud",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_049",
+    "text": "**What to do:**\n- Verify any lending app against the RBI's list of registered NBFCs before installing or accepting funds.\n- Revoke device permissions and uninstall the app immediately if suspicious behaviour is noticed.\n- Do not pay ransom-style demands driven by threats — this typically escalates rather than resolves the harassment.\n- Report to the local cyber crime cell and file a complaint via cybercrime.gov.in or the 1930 helpline; also flag the app on the Play Store for review.",
+    "metadata": {
+      "file": "08_cert-in-i4c_fake-loan-app-fraud.md",
+      "word_count": 80,
+      "source": "CERT-In (Indian Computer Emergency Response Team) / I4C",
+      "topic": "Fake Loan App Fraud",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_050",
+    "text": "**RAG relevance:** Supports queries like \"is this loan app safe,\" \"loan app is threatening to contact my family,\" \"how to check if a lending app is RBI-registered,\" \"what to do if a loan app is harassing me.\"",
+    "metadata": {
+      "file": "08_cert-in-i4c_fake-loan-app-fraud.md",
+      "word_count": 37,
+      "source": "CERT-In (Indian Computer Emergency Response Team) / I4C",
+      "topic": "Fake Loan App Fraud",
+      "url": "https://www.cert-in.org.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_052",
+    "text": "# RBI \"BE(A)WARE\" Booklet: SIM Swap and QR Code Fraud\n\nThe Reserve Bank of India publishes a consumer-facing awareness booklet, commonly referred to as \"BE(A)WARE,\" that catalogues the modus operandi of frauds affecting retail digital transactions and the precautions customers should take. Two categories covered in detail are SIM swap/cloning and QR-code-based scams.",
+    "metadata": {
+      "file": "09_rbi_sim-swap-qr-code-fraud.md",
+      "word_count": 53,
+      "source": "Reserve Bank of India (RBI) - \"BE(A)WARE\" Public Awareness Booklet",
+      "topic": "SIM Swap Fraud & QR Code Scams",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_053",
+    "text": "**SIM swap / SIM cloning:** The fraudster first gathers the victim's mobile number and linked bank details through phishing, vishing (voice phishing), malware, or general social engineering. Using this information, they approach the telecom operator — sometimes with forged documents, sometimes with the help of a complicit insider — requesting a replacement SIM or a number port, citing a lost or damaged handset. Once the swap is processed, the victim's original SIM goes silent, and all OTPs, transaction alerts, and one-time confirmations are delivered instead to the fraudster's device. Because the victim's phone shows no incoming SMS alerts during this window, unauthorised transactions can proceed for hours before being noticed.",
+    "metadata": {
+      "file": "09_rbi_sim-swap-qr-code-fraud.md",
+      "word_count": 110,
+      "source": "Reserve Bank of India (RBI) - \"BE(A)WARE\" Public Awareness Booklet",
+      "topic": "SIM Swap Fraud & QR Code Scams",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_054",
+    "text": "**QR code scams:** Rather than \"receiving\" money by scanning a QR code (which is not how UPI works), victims are misled into scanning a code that is actually a **payment request**, authorising a debit from their own account. This is frequently paired with fake seller/buyer interactions on classified or resale platforms — a \"buyer\" expresses interest, then sends a QR code claiming it will trigger a payment to the seller, when scanning and entering the PIN instead sends money out.",
+    "metadata": {
+      "file": "09_rbi_sim-swap-qr-code-fraud.md",
+      "word_count": 80,
+      "source": "Reserve Bank of India (RBI) - \"BE(A)WARE\" Public Awareness Booklet",
+      "topic": "SIM Swap Fraud & QR Code Scams",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_055",
+    "text": "**RBI's recommended precautions:**\n- Treat any unexpected \"SIM not working\" or \"network issue\" as a possible red flag — contact your telecom provider directly if it persists without explanation.\n- Register for instant SMS and email transaction alerts on all bank accounts, since a SIM swap silences only SMS, not necessarily email.\n- Remember that scanning a QR code or entering a UPI PIN is always an action that sends money out, never a way to receive it.\n- Verify with your telecom provider before any SIM replacement or port-out request is approved, and monitor for unexpected SIM deactivation notices.\n- Report suspected SIM swap fraud to your bank and telecom operator immediately, then file a complaint via cybercrime.gov.in or the 1930 helpline.",
+    "metadata": {
+      "file": "09_rbi_sim-swap-qr-code-fraud.md",
+      "word_count": 123,
+      "source": "Reserve Bank of India (RBI) - \"BE(A)WARE\" Public Awareness Booklet",
+      "topic": "SIM Swap Fraud & QR Code Scams",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_056",
+    "text": "**RAG relevance:** Supports queries like \"what is SIM swap fraud,\" \"is scanning a QR code safe to receive money,\" \"my SIM suddenly stopped working, what should I do,\" \"how does RBI define QR code scams.\"",
+    "metadata": {
+      "file": "09_rbi_sim-swap-qr-code-fraud.md",
+      "word_count": 35,
+      "source": "Reserve Bank of India (RBI) - \"BE(A)WARE\" Public Awareness Booklet",
+      "topic": "SIM Swap Fraud & QR Code Scams",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_058",
+    "text": "# RBI Digital Lending Guidelines and Fake Loan App Regulation\n\nThe RBI's Digital Lending Guidelines (first issued 2022, updated 2023) exist specifically to distinguish legitimate digital lenders from the large number of unauthorised loan apps circulating on app stores and social media. To address the scale of the problem, RBI has also proposed creating a centralised public repository of registered digital lending apps so consumers can verify legitimacy before engaging with any lender.",
+    "metadata": {
+      "file": "10_rbi_digital-lending-guidelines-fake-apps.md",
+      "word_count": 73,
+      "source": "Reserve Bank of India (RBI) - Digital Lending Guidelines",
+      "topic": "Fake Loan Apps & Digital Lending Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_059",
+    "text": "**Key rules under the guidelines that protect borrowers:**\n- **Direct disbursal:** Loan amounts must be credited directly to the borrower's bank account from the lender's own account — never routed through third-party wallets or intermediary accounts, a structure fraudulent apps often use to obscure money trails.\n- **Key Facts Statement (KFS):** Before a loan is approved, the lender must provide a KFS in simple language showing the effective annual interest rate (APR), total cost of the loan, and full repayment schedule — the absence of a KFS is itself a warning sign of an illegitimate lender.\n- **No unnecessary data access:** Regulated lenders and their Lending Service Providers are explicitly barred from accessing a borrower's contact list, photos, or unrelated device data — a rule fake loan apps routinely violate to enable harassment tactics later.\n- **Cooling-off period:** Borrowers have a right to exit a short-term loan within an initial window (typically around 3 days) by repaying only principal and proportional interest, with no penalty.",
+    "metadata": {
+      "file": "10_rbi_digital-lending-guidelines-fake-apps.md",
+      "word_count": 165,
+      "source": "Reserve Bank of India (RBI) - Digital Lending Guidelines",
+      "topic": "Fake Loan Apps & Digital Lending Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_060",
+    "text": "**Why this matters for fraud detection:** Every one of these rules maps directly to a common fake-loan-app red flag — no KFS, contact-list access requested, funds routed through odd intermediary accounts, and aggressive short repayment windows are all signs a lending app is operating outside RBI's regulatory framework, regardless of how professional its marketing looks.",
+    "metadata": {
+      "file": "10_rbi_digital-lending-guidelines-fake-apps.md",
+      "word_count": 55,
+      "source": "Reserve Bank of India (RBI) - Digital Lending Guidelines",
+      "topic": "Fake Loan Apps & Digital Lending Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_061",
+    "text": "**Guidance for consumers:**\n- Check whether a lending app or its parent NBFC appears in RBI's list of registered entities before applying.\n- Treat any app requesting contact/gallery/SMS access as a serious red flag, irrespective of loan terms offered.\n- If harassed after borrowing from an unregistered app, do not continue paying under threat — instead file a complaint with the local cyber crime cell, report via cybercrime.gov.in, and flag the app on the Play Store.\n- Report violations of RBI's digital lending norms directly to RBI's grievance channels, since these apps typically operate outside any legitimate regulatory relationship.",
+    "metadata": {
+      "file": "10_rbi_digital-lending-guidelines-fake-apps.md",
+      "word_count": 99,
+      "source": "Reserve Bank of India (RBI) - Digital Lending Guidelines",
+      "topic": "Fake Loan Apps & Digital Lending Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_062",
+    "text": "**RAG relevance:** Supports queries like \"is this loan app RBI registered,\" \"what is a Key Facts Statement,\" \"why do fake loan apps ask for my contacts,\" \"what rights does a borrower have against a fake lending app.\"",
+    "metadata": {
+      "file": "10_rbi_digital-lending-guidelines-fake-apps.md",
+      "word_count": 37,
+      "source": "Reserve Bank of India (RBI) - Digital Lending Guidelines",
+      "topic": "Fake Loan Apps & Digital Lending Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_064",
+    "text": "# RBI Public Notice: Fictitious Offers and Impersonation of RBI Officials\n\nThe Reserve Bank of India periodically re-issues a standing public notice cautioning citizens against fraudsters who impersonate RBI officials or falsely invoke the RBI's name to lend credibility to a scam. This is directly relevant to digital arrest and impersonation fraud, since several documented cases show scammers claiming to represent \"RBI\" alongside CBI, ED, or Customs to make threats of account freezing or legal action feel more official.",
+    "metadata": {
+      "file": "11_rbi_fictitious-offers-impersonation-notice.md",
+      "word_count": 79,
+      "source": "Reserve Bank of India (RBI) - Public Notice on Fictitious Offers",
+      "topic": "Fake RBI Official Impersonation & Fictitious Offers",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_065",
+    "text": "**RBI's clarified position, restated in these notices:**\n- The RBI never contacts members of the public directly through unsolicited phone calls, emails, or messages asking for money, personal banking details, OTPs, or passwords.\n- The RBI does not hold individual customer bank accounts, does not manage personal funds or foreign currency for individuals, and does not directly issue loans, prizes, lottery winnings, or grants to the public.\n- The RBI does not send links asking citizens to \"verify\" KYC, unlock accounts, or claim a refund — any communication of this kind claiming to be from RBI is fraudulent.\n- Any threat of \"RBI action\" against a personal bank account for KYC non-compliance, made through a phone call or message, is not how RBI's regulatory function actually operates — RBI regulates banks and NBFCs as institutions, not individual customer accounts directly.",
+    "metadata": {
+      "file": "11_rbi_fictitious-offers-impersonation-notice.md",
+      "word_count": 140,
+      "source": "Reserve Bank of India (RBI) - Public Notice on Fictitious Offers",
+      "topic": "Fake RBI Official Impersonation & Fictitious Offers",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_066",
+    "text": "**Why this matters for a fraud-detection system:** Because RBI's name carries strong institutional trust, fraudsters frequently misuse it as one part of a larger digital arrest or impersonation script — for example, \"your account has been flagged by RBI for suspicious activity, cooperate with this CBI investigation or your account will be frozen.\" Recognising that RBI itself never initiates such direct citizen contact allows a citizen (or an AI verification agent) to immediately flag the call as almost certainly fraudulent, without needing to evaluate the rest of the scam narrative.",
+    "metadata": {
+      "file": "11_rbi_fictitious-offers-impersonation-notice.md",
+      "word_count": 90,
+      "source": "Reserve Bank of India (RBI) - Public Notice on Fictitious Offers",
+      "topic": "Fake RBI Official Impersonation & Fictitious Offers",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_067",
+    "text": "**Recommended actions:**\n- Treat any call, SMS, or email claiming to be from the \"RBI\" that asks for personal/financial information or threatens account action as fraudulent by default.\n- Do not act on any \"RBI order\" communicated informally — genuine regulatory actions are always routed through your bank, not directly to individual customers by RBI.\n- Verify any such claim independently through your bank's official helpline, not a number provided by the caller.\n- Report the incident at cybercrime.gov.in or call 1930.",
+    "metadata": {
+      "file": "11_rbi_fictitious-offers-impersonation-notice.md",
+      "word_count": 82,
+      "source": "Reserve Bank of India (RBI) - Public Notice on Fictitious Offers",
+      "topic": "Fake RBI Official Impersonation & Fictitious Offers",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_068",
+    "text": "**RAG relevance:** Supports queries like \"is RBI calling me directly, real or fake,\" \"someone says RBI has frozen my account,\" \"does RBI ever contact individual customers,\" \"how to verify an RBI-related threat.\"",
+    "metadata": {
+      "file": "11_rbi_fictitious-offers-impersonation-notice.md",
+      "word_count": 32,
+      "source": "Reserve Bank of India (RBI) - Public Notice on Fictitious Offers",
+      "topic": "Fake RBI Official Impersonation & Fictitious Offers",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_070",
+    "text": "# RBI Customer Liability Framework and Digital Payment Fraud Compensation\n\nBeyond warning citizens about scams, the RBI has built a regulatory framework determining who bears financial responsibility when digital payment fraud occurs — critical information for a citizen-facing advisory agent, since victims often don't know whether they are entitled to a refund.",
+    "metadata": {
+      "file": "12_rbi_customer-liability-fraud-compensation.md",
+      "word_count": 52,
+      "source": "Reserve Bank of India (RBI) - Customer Liability Framework & Digital Payment Fraud Directions",
+      "topic": "Customer Liability, Refunds, and Fraud Compensation Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_071",
+    "text": "**RBI's Customer Liability Framework (2017, still foundational) sets three categories:**\n1. **Zero liability for the customer:** applies when the fraud results from a bank/system-side breach, or a third-party breach where the customer promptly reports the unauthorised transaction (generally within 3 working days of receiving the transaction alert).\n2. **Limited liability:** applies where there is delayed reporting (typically 4–7 working days) or contributory negligence not directly caused by the customer, subject to caps set by RBI.\n3. **Full liability:** applies where the loss results from the customer's own negligence — for example, sharing an OTP, PIN, or password with someone, which shifts responsibility away from zero-liability protection.",
+    "metadata": {
+      "file": "12_rbi_customer-liability-fraud-compensation.md",
+      "word_count": 106,
+      "source": "Reserve Bank of India (RBI) - Customer Liability Framework & Digital Payment Fraud Directions",
+      "topic": "Customer Liability, Refunds, and Fraud Compensation Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_072",
+    "text": "**RBI's 2026 draft amendment directions** (proposed under the Digital Lending/Responsible Business Conduct framework) further clarify categories of fraudulent electronic transactions distinct from ordinary \"authorised\" ones: a transaction is still treated as fraudulent, despite being completed with a correct OTP/PIN, if the customer was coerced under pressure by a scammer or deceived into transferring funds to someone posing as a legitimate recipient — directly covering digital arrest and impersonation-driven fraud, not just stolen-credential fraud. The draft proposes that in many such cases, compensation would be funded substantially by the central bank/system, with smaller contributions from the customer's and beneficiary's banks.",
+    "metadata": {
+      "file": "12_rbi_customer-liability-fraud-compensation.md",
+      "word_count": 99,
+      "source": "Reserve Bank of India (RBI) - Customer Liability Framework & Digital Payment Fraud Directions",
+      "topic": "Customer Liability, Refunds, and Fraud Compensation Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_073",
+    "text": "**Practical guidance for citizens:**\n- Report any unauthorised or coerced transaction to your bank **immediately** — the specific number of hours/days directly affects how much liability protection applies.\n- Reporting via your bank's official complaint channel and simultaneously via cybercrime.gov.in or the 1930 helpline creates a stronger paper trail for both compensation claims and criminal investigation.\n- If a transaction was made under threat or deception (e.g., during a digital arrest call) rather than simple carelessness, explicitly state this when filing the complaint, since it affects which liability category applies.\n- Keep records — screenshots, call recordings, transaction IDs — as these materially strengthen both the bank's internal fraud review and the police case.",
+    "metadata": {
+      "file": "12_rbi_customer-liability-fraud-compensation.md",
+      "word_count": 114,
+      "source": "Reserve Bank of India (RBI) - Customer Liability Framework & Digital Payment Fraud Directions",
+      "topic": "Customer Liability, Refunds, and Fraud Compensation Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_074",
+    "text": "**RAG relevance:** Supports queries like \"will my bank refund a UPI fraud transaction,\" \"how many days do I have to report fraud for zero liability,\" \"what if I was pressured into making the transfer,\" \"does RBI cover fraud due to digital arrest scams.\"",
+    "metadata": {
+      "file": "12_rbi_customer-liability-fraud-compensation.md",
+      "word_count": 43,
+      "source": "Reserve Bank of India (RBI) - Customer Liability Framework & Digital Payment Fraud Directions",
+      "topic": "Customer Liability, Refunds, and Fraud Compensation Rules",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_076",
+    "text": "# cybercrime.gov.in: How to Report UPI Fraud\n\nThe National Cyber Crime Reporting Portal, operated under the Ministry of Home Affairs' Indian Cyber Crime Coordination Centre (I4C), provides a dedicated channel — the Citizen Financial Cyber Fraud Reporting and Management System (CFCFRMS) — specifically for financial fraud including UPI transactions, which is distinct from the portal's general cybercrime complaint system for other categories like harassment or hacking.",
+    "metadata": {
+      "file": "13_cybercrime-gov-in_upi-fraud-reporting.md",
+      "word_count": 66,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "UPI Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_077",
+    "text": "**Why speed matters:** UPI transactions settle almost instantly, so the only realistic way to recover funds is to get the receiving bank account frozen before the fraudster withdraws the money. Complaints filed within roughly the first 24 hours have a materially higher chance of the beneficiary account being frozen in time; delays of days or weeks make recovery increasingly unlikely, since money is typically moved through a chain of mule accounts within hours.",
+    "metadata": {
+      "file": "13_cybercrime-gov-in_upi-fraud-reporting.md",
+      "word_count": 73,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "UPI Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_078",
+    "text": "**Step-by-step reporting process:**\n1. Call the toll-free national cybercrime helpline **1930** immediately — operators can flag the transaction with the receiving bank in real time, before you even complete the online complaint.\n2. Go to **cybercrime.gov.in** and select \"Report and Track\" → \"Report Cyber Crime\" → choose the financial fraud category.\n3. Provide the exact transaction ID / UTR number, date and time, amount, the UPI ID or account number the money was sent to, and a description of how the fraud occurred (e.g., phishing link, fake customer care call, screen-sharing app).\n4. Attach screenshots of the transaction, the fraudulent message/call details, and any other supporting evidence.\n5. Note the acknowledgment number generated after submission — this is required to track the complaint status later via the portal's \"Track your Complaint Status\" page.\n6. Separately inform your own bank's fraud helpline so they can flag the transaction internally and support the freeze request from their end.",
+    "metadata": {
+      "file": "13_cybercrime-gov-in_upi-fraud-reporting.md",
+      "word_count": 156,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "UPI Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_079",
+    "text": "**Additional portal features relevant to fraud response:**\n- The **Suspect Repository** tool lets citizens search phone numbers, UPI IDs, email addresses, and bank account numbers already flagged by other victims, helping verify if a number or ID is a known scam source before transacting.\n- Citizens can register as **Cyber Volunteers** to help flag unlawful online content.\n- The portal supports complaint status tracking and escalation to State/UT Nodal Officers if the response is inadequate.",
+    "metadata": {
+      "file": "13_cybercrime-gov-in_upi-fraud-reporting.md",
+      "word_count": 75,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "UPI Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_080",
+    "text": "**RAG relevance:** Supports queries like \"how do I report UPI fraud,\" \"what information do I need to file a cybercrime complaint,\" \"how fast should I report to get my money back,\" \"how to check if a UPI ID is already flagged as fraud.\"",
+    "metadata": {
+      "file": "13_cybercrime-gov-in_upi-fraud-reporting.md",
+      "word_count": 43,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "UPI Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_082",
+    "text": "# cybercrime.gov.in: How to Report OTP Fraud\n\nOTP fraud is reported through the same National Cyber Crime Reporting Portal used for UPI fraud, but the details a victim needs to capture differ slightly because the point of compromise is usually a voice call or message rather than a payment link. I4C treats OTP-based fraud as a high-priority category because it frequently precedes SIM-swap-driven account takeovers and larger financial losses.",
+    "metadata": {
+      "file": "14_cybercrime-gov-in_otp-fraud-reporting.md",
+      "word_count": 69,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "OTP Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_083",
+    "text": "**What distinguishes an OTP fraud complaint:**\n- The complaint should clearly document *how* the OTP was obtained by the fraudster — whether through a direct phone request, a fake \"verification\" SMS/link, or after installing a screen-sharing app — since this affects which fraud sub-category the case is filed under and which evidence is most useful (call logs vs. message screenshots vs. app installation history).\n- If the OTP fraud was preceded by a SIM swap (sudden loss of network signal), this should be reported both to the telecom operator and flagged explicitly in the cybercrime complaint, since it may indicate insider involvement at a telecom outlet and is investigated differently from a simple phishing-based OTP leak.",
+    "metadata": {
+      "file": "14_cybercrime-gov-in_otp-fraud-reporting.md",
+      "word_count": 116,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "OTP Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_084",
+    "text": "**Step-by-step process:**\n1. Call the **1930** helpline immediately if any unauthorised transaction has already occurred — this is the fastest route to requesting an account freeze at the receiving bank.\n2. File a detailed complaint on **cybercrime.gov.in** under \"Report and Track,\" selecting the financial fraud / OTP fraud category.\n3. Include: the phone number or sender ID that requested the OTP, the exact time of the call/message, whether any app was installed at their instruction, and full transaction details if money was already debited.\n4. Preserve evidence — call recordings if available, SMS screenshots, and the app name/installation timestamp if a remote-access tool was involved.\n5. Separately notify your bank so it can flag the account and, where possible, initiate a chargeback or transaction reversal request in parallel with the police complaint.\n6. Track your complaint using the acknowledgment number via the portal's status-check page.",
+    "metadata": {
+      "file": "14_cybercrime-gov-in_otp-fraud-reporting.md",
+      "word_count": 145,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "OTP Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_085",
+    "text": "**Additional advice from I4C awareness material:**\n- Never share an OTP verbally, over text, or through any third-party app, regardless of the caller's claimed identity.\n- If an OTP was shared under pressure or deception (e.g., posing as bank support), state this explicitly in the complaint — it materially affects the liability determination discussed in RBI's customer liability framework.",
+    "metadata": {
+      "file": "14_cybercrime-gov-in_otp-fraud-reporting.md",
+      "word_count": 59,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "OTP Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_086",
+    "text": "**RAG relevance:** Supports queries like \"how do I report OTP fraud,\" \"what details should I include when reporting an OTP scam,\" \"should I report to telecom or bank first after SIM swap,\" \"how to preserve evidence after sharing an OTP by mistake.\"",
+    "metadata": {
+      "file": "14_cybercrime-gov-in_otp-fraud-reporting.md",
+      "word_count": 42,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "OTP Fraud Reporting Process",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_088",
+    "text": "# cybercrime.gov.in / I4C: Reporting Digital Arrest and Verifying Suspects\n\nBecause digital arrest scams involve extended, high-pressure calls rather than a single transaction, I4C's guidance for this category emphasises evidence capture during the incident itself, not only after-the-fact reporting.",
+    "metadata": {
+      "file": "15_cybercrime-gov-in-i4c_digital-arrest-reporting.md",
+      "word_count": 39,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Digital Arrest Reporting & Suspect Verification",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_089",
+    "text": "**During an ongoing or suspected digital arrest call:**\n- If safely possible, take a screenshot or screen recording of the video call, including any displayed fake documents, IDs, or uniforms.\n- Note the caller's phone number(s), any WhatsApp/Skype ID used, and the exact claims made (which agency, what alleged crime, what payment was demanded and to which account/UPI ID).\n- Do not comply with instructions to stay isolated, avoid contacting family, or keep the camera on continuously — these are core manipulation tactics, not genuine procedural requirements from any real agency.",
+    "metadata": {
+      "file": "15_cybercrime-gov-in-i4c_digital-arrest-reporting.md",
+      "word_count": 91,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Digital Arrest Reporting & Suspect Verification",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_090",
+    "text": "**Reporting steps once the call has ended (or fraud is suspected):**\n1. Call the national helpline **1930** as the fastest first step, especially if any money has already been transferred — this triggers an attempt to freeze the receiving account.\n2. File a complaint on **cybercrime.gov.in** under \"Report and Track,\" selecting the appropriate cybercrime category (digital arrest cases are generally filed as impersonation/extortion-related financial fraud).\n3. Provide all captured evidence: recordings, screenshots, phone numbers, UPI IDs/account numbers used for any transfer, and a full timeline of the call.\n4. Use the portal's **Suspect Repository** feature to check whether the phone number, UPI ID, or bank account involved has already been flagged by other victims — this is useful both for personal verification and for strengthening the case file.\n5. Track complaint status using the acknowledgment number generated at submission.",
+    "metadata": {
+      "file": "15_cybercrime-gov-in-i4c_digital-arrest-reporting.md",
+      "word_count": 139,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Digital Arrest Reporting & Suspect Verification",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_091",
+    "text": "**I4C's broader institutional response:** I4C operates a Cyber Fraud Mitigation Centre bringing together representatives from telecom companies, banks, payment aggregators, and police to enable faster coordinated freezing of accounts linked to fraud networks. I4C has also worked with platforms like Microsoft to take down groups of Skype IDs linked to organised scam operations, and coordinates SIM and IMEI blocking for devices flagged in fraud investigations.",
+    "metadata": {
+      "file": "15_cybercrime-gov-in-i4c_digital-arrest-reporting.md",
+      "word_count": 65,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Digital Arrest Reporting & Suspect Verification",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_092",
+    "text": "**Key reassurance for citizens:** No government agency conducts an \"arrest,\" investigation, or bail process over a phone or video call. Legitimate agencies communicate through official written notices and require in-person appearance — a call demanding money to avoid arrest is, without exception, a scam.",
+    "metadata": {
+      "file": "15_cybercrime-gov-in-i4c_digital-arrest-reporting.md",
+      "word_count": 44,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Digital Arrest Reporting & Suspect Verification",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_093",
+    "text": "**RAG relevance:** Supports queries like \"what evidence should I collect during a digital arrest call,\" \"how to report a digital arrest scam to I4C,\" \"how to check if a number is a known scammer,\" \"what does I4C do about cross-agency fraud coordination.\"",
+    "metadata": {
+      "file": "15_cybercrime-gov-in-i4c_digital-arrest-reporting.md",
+      "word_count": 42,
+      "source": "National Cyber Crime Reporting Portal (cybercrime.gov.in), I4C",
+      "topic": "Digital Arrest Reporting & Suspect Verification",
+      "url": "https://cybercrime.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_095",
+    "text": "# PhishTank: Community-Verified Phishing URL Database\n\nPhishTank, operated by Cisco Talos Intelligence Group, is a widely used open, community-driven database of confirmed phishing websites. While it is a global resource rather than India-specific, it is directly useful as a technical building block for a fraud-detection platform's phishing-website identification component — for example, checking whether a link shared in a suspected UPI phishing or fake-bank-portal scam has already been reported and verified elsewhere.",
+    "metadata": {
+      "file": "16_phishtank_phishing-url-database.md",
+      "word_count": 72,
+      "source": "PhishTank (operated by Cisco Talos Intelligence Group)",
+      "topic": "Phishing Website Detection & Verified URL Database",
+      "url": "https://phishtank.org/developer_info.php",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_096",
+    "text": "**How the platform works:** Anyone can submit a suspected phishing URL to PhishTank. Submissions are then reviewed and voted on by the community until a consensus verdict is reached, at which point a URL is marked \"verified\" as an actual phishing site or cleared as a false positive. Only verified, currently online phishing URLs are included in the downloadable datasets, which update on an hourly basis.",
+    "metadata": {
+      "file": "16_phishtank_phishing-url-database.md",
+      "word_count": 66,
+      "source": "PhishTank (operated by Cisco Talos Intelligence Group)",
+      "topic": "Phishing Website Detection & Verified URL Database",
+      "url": "https://phishtank.org/developer_info.php",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_097",
+    "text": "**Data available for integration into a fraud-detection agent:**\n- **Formats:** XML, CSV, JSON, and serialised PHP feeds are all available at `data.phishtank.com`, each updated hourly.\n- **Key fields per entry:** `phish_id` (unique identifier), `url` (the phishing link itself), `phish_detail_url` (link to community evidence and screenshot), `submission_time`, `verified` status, `verification_time`, `online` status, and `target` (the brand or company being impersonated, e.g., a specific bank).\n- **Access:** Small-scale lookups can be done without registration; automated/bulk fetching requires a free application key, after which requests are made via a keyed URL pattern to avoid rate limiting.",
+    "metadata": {
+      "file": "16_phishtank_phishing-url-database.md",
+      "word_count": 93,
+      "source": "PhishTank (operated by Cisco Talos Intelligence Group)",
+      "topic": "Phishing Website Detection & Verified URL Database",
+      "url": "https://phishtank.org/developer_info.php",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_098",
+    "text": "**Relevance to this hackathon's Citizen Fraud Shield / Counterfeit-and-Fraud platform:** A phishing-link-checking feature (e.g., \"paste a suspicious SMS/link, get an instant verdict\") can query this dataset as one signal among several — a URL already verified on PhishTank as impersonating a bank or UPI brand is strong evidence of fraud, while an unlisted URL is inconclusive rather than \"safe\" (since PhishTank cannot cover every scam link, especially new India-specific or regional ones, within minutes of creation).",
+    "metadata": {
+      "file": "16_phishtank_phishing-url-database.md",
+      "word_count": 76,
+      "source": "PhishTank (operated by Cisco Talos Intelligence Group)",
+      "topic": "Phishing Website Detection & Verified URL Database",
+      "url": "https://phishtank.org/developer_info.php",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_099",
+    "text": "**Practical caveat:** Because PhishTank is global and English/Western-brand-heavy, it should be combined with India-specific sources (CERT-In malicious domain advisories, bank-reported fraud URLs, cybercrime.gov.in suspect repository) rather than used as the sole detection signal for Indian UPI/bank phishing links.",
+    "metadata": {
+      "file": "16_phishtank_phishing-url-database.md",
+      "word_count": 38,
+      "source": "PhishTank (operated by Cisco Talos Intelligence Group)",
+      "topic": "Phishing Website Detection & Verified URL Database",
+      "url": "https://phishtank.org/developer_info.php",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_100",
+    "text": "**RAG relevance:** Supports queries like \"how can an AI agent check if a link is a known phishing site,\" \"what data does PhishTank provide,\" \"how to verify a suspicious URL automatically,\" \"what fields are in a phishing URL database.\"",
+    "metadata": {
+      "file": "16_phishtank_phishing-url-database.md",
+      "word_count": 39,
+      "source": "PhishTank (operated by Cisco Talos Intelligence Group)",
+      "topic": "Phishing Website Detection & Verified URL Database",
+      "url": "https://phishtank.org/developer_info.php",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_102",
+    "text": "# NCRB/NCRP Data: UPI Fraud Statistics and Trends\n\nData drawn from the National Cybercrime Reporting Portal and Parliament-shared Finance Ministry figures — both linked to NCRB's crime-reporting infrastructure — shows UPI fraud as one of the fastest-growing categories of financial cybercrime in India. Complaint volumes rose sharply from FY23 to FY26, with cases nearly doubling year-over-year in the earlier part of this period before growth moderated somewhat as UPI's own transaction volume also grew (UPI itself surpassed 20 billion monthly transactions in 2025).",
+    "metadata": {
+      "file": "17_ncrb-ncrp_upi-fraud-statistics.md",
+      "word_count": 83,
+      "source": "National Crime Records Bureau (NCRB) / National Cybercrime Reporting Portal (NCRP)",
+      "topic": "UPI Fraud Statistics and Trends",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_103",
+    "text": "**Approximate trend (based on NCRP/Finance Ministry figures):**\n- UPI fraud losses roughly doubled between FY23 and FY24, reaching over ₹1,000 crore in FY24 across more than 13 lakh reported cases.\n- FY25 saw continued high case volumes, with losses running close to ₹1,000 crore across roughly 12–13 lakh complaints.\n- Early FY26 data (reported through Parliament disclosures) shows losses continuing to climb even as the fraud rate per transaction stays a small fraction of overall UPI volume — the absolute rupee impact remains large purely because of the sheer scale of UPI adoption (46+ crore monthly users).",
+    "metadata": {
+      "file": "17_ncrb-ncrp_upi-fraud-statistics.md",
+      "word_count": 97,
+      "source": "National Crime Records Bureau (NCRB) / National Cybercrime Reporting Portal (NCRP)",
+      "topic": "UPI Fraud Statistics and Trends",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_104",
+    "text": "**Patterns visible in the complaint data:**\n- QR code swaps and fake collect requests account for a large share of reported UPI fraud cases, particularly affecting small merchants and shopkeepers.\n- Remote-access app fraud (screen-sharing scams) tends to produce higher per-incident losses than simple phishing-link fraud, since the fraudster gains direct, real-time visibility into the victim's banking session.\n- SIM-swap-enabled fraud, while a smaller share of total complaints, is associated with disproportionately large individual losses because it enables full account takeover rather than a single unauthorised transaction.\n- Recovery rates are strongly time-sensitive: complaints filed within roughly 30 minutes to a few hours of the fraudulent transaction show substantially higher fund-recovery rates than those reported after a day or more, since money typically moves through a chain of mule accounts within hours.",
+    "metadata": {
+      "file": "17_ncrb-ncrp_upi-fraud-statistics.md",
+      "word_count": 132,
+      "source": "National Crime Records Bureau (NCRB) / National Cybercrime Reporting Portal (NCRP)",
+      "topic": "UPI Fraud Statistics and Trends",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_105",
+    "text": "**Caveat:** NCRB's own formally published Crime in India report typically lags the current year by 12–24 months; for near-real-time figures, NCRP portal statistics and I4C/Finance Ministry disclosures (including Parliament Q&A responses) are the more current proxy and should be cross-checked against the latest available NCRB annual report when it is released.",
+    "metadata": {
+      "file": "17_ncrb-ncrp_upi-fraud-statistics.md",
+      "word_count": 51,
+      "source": "National Crime Records Bureau (NCRB) / National Cybercrime Reporting Portal (NCRP)",
+      "topic": "UPI Fraud Statistics and Trends",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_106",
+    "text": "**RAG relevance:** Supports queries like \"how much money is lost to UPI fraud in India,\" \"which UPI fraud type causes the biggest losses,\" \"how fast should fraud be reported to recover money,\" \"what does NCRB data say about UPI fraud trends.\"",
+    "metadata": {
+      "file": "17_ncrb-ncrp_upi-fraud-statistics.md",
+      "word_count": 41,
+      "source": "National Crime Records Bureau (NCRB) / National Cybercrime Reporting Portal (NCRP)",
+      "topic": "UPI Fraud Statistics and Trends",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_108",
+    "text": "# NCRB/MHA Data: Digital Arrest Scam Scale and Spread\n\nWhile NCRB does not maintain a separate crime-code specifically labelled \"digital arrest\" (it is typically recorded under broader impersonation/extortion/cheating categories), the Ministry of Home Affairs and I4C have released specific figures on the scale of this scam category, which feed into and are cross-referenced against NCRB's broader cybercrime totals.",
+    "metadata": {
+      "file": "18_ncrb-mha_digital-arrest-scale-spread.md",
+      "word_count": 58,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs / I4C",
+      "topic": "Digital Arrest Scam Scale and Geographic Spread",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_109",
+    "text": "**Scale indicators:**\n- MHA figures show digital arrest fraud losses exceeding ₹120 crore in just the first four months of 2024, with the Ministry of Home Affairs later reporting losses crossing ₹1,776 crore across the first nine months of 2024 when digital arrest is considered alongside closely related impersonation fraud categories.\n- The National Cybercrime Reporting Portal recorded a sharp rise in overall complaint volumes tied to impersonation fraud, growing from several lakh complaints in 2021 to multiple lakh complaints within just the first few months of later years — reflecting both a genuine rise in incidents and improved public awareness of where to report.\n- NCRB's broader cybercrime case count (all categories combined) rose from 65,893 cases in 2022 to 86,420 cases in 2023, with fraud and cheating consistently the largest contributing offence category.",
+    "metadata": {
+      "file": "18_ncrb-mha_digital-arrest-scale-spread.md",
+      "word_count": 135,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs / I4C",
+      "topic": "Digital Arrest Scam Scale and Geographic Spread",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_110",
+    "text": "**Geographic and operational patterns:**\n- High-value digital arrest cases have been reported across major metros — Delhi, Mumbai, Bengaluru, Hyderabad, Noida — with victims spanning retired government employees, senior professionals, and business owners, indicating the scam is not confined to any single city or income bracket.\n- A significant share of the organised infrastructure behind these scams — call centres, script writers, mule account networks — has been traced to operations based outside India, particularly across parts of Southeast Asia, which has driven the formation of an inter-ministerial committee (established 2024) to coordinate cross-border investigation.\n- Government response has included blocking of large numbers of SIM cards and device IMEIs linked to fraud operations (cumulative figures in the hundreds of thousands, per MHA disclosures), alongside coordinated bank-account-freezing actions.",
+    "metadata": {
+      "file": "18_ncrb-mha_digital-arrest-scale-spread.md",
+      "word_count": 128,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs / I4C",
+      "topic": "Digital Arrest Scam Scale and Geographic Spread",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_111",
+    "text": "**Caveat for RAG use:** Because digital arrest is not a standalone NCRB crime-code category, any dataset or dashboard drawing on this file should clarify that figures are drawn from a combination of NCRB's general cybercrime totals, MHA/I4C press disclosures, and NCRP complaint data — not a single unified NCRB \"digital arrest\" statistic.",
+    "metadata": {
+      "file": "18_ncrb-mha_digital-arrest-scale-spread.md",
+      "word_count": 52,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs / I4C",
+      "topic": "Digital Arrest Scam Scale and Geographic Spread",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_112",
+    "text": "**RAG relevance:** Supports queries like \"how big is the digital arrest problem in India,\" \"which cities report the most digital arrest cases,\" \"where do these scam operations originate,\" \"how has the government responded at scale.\"",
+    "metadata": {
+      "file": "18_ncrb-mha_digital-arrest-scale-spread.md",
+      "word_count": 35,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs / I4C",
+      "topic": "Digital Arrest Scam Scale and Geographic Spread",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_114",
+    "text": "# NCRB/I4C Data: Victim Demographics in Digital Fraud and Digital Arrest Scams\n\nVictim profile data, compiled through I4C's complaint intake (which feeds into NCRB's broader crime statistics) and referenced in several Ministry of Home Affairs briefings, shows a consistent demographic pattern across digital arrest and impersonation-fraud cases that is directly useful for designing a targeted citizen-facing warning system.",
+    "metadata": {
+      "file": "19_ncrb-i4c_victim-demographics.md",
+      "word_count": 58,
+      "source": "National Crime Records Bureau (NCRB) / I4C Victim Demographics",
+      "topic": "Victim Demographics in Digital Fraud (Age, Occupation Patterns)",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_115",
+    "text": "**Key demographic patterns:**\n- **Elderly and retired citizens are disproportionately represented among high-value victims.** While younger age groups (18–35) file the largest raw number of cybercrime complaints overall (reflecting higher internet/UPI usage), the average loss per case is markedly higher among victims aged 50 and above, particularly retired government employees and pensioners — a group specifically and repeatedly targeted by digital arrest scam scripts that reference pension accounts, provident fund issues, or fake CBI \"investigations\" into their savings.\n- **Occupation-linked targeting:** Complaint data shows notable concentrations of victims among retired defence/government personnel, doctors, and small business owners — groups perceived by scam operators as having higher liquid savings and greater susceptibility to authority-based intimidation.\n- **Digital literacy gap:** A recurring factor across victim interviews (cited in MHA and NCRB-linked briefings) is limited familiarity with how digital banking security actually works — for example, not knowing that banks never call asking for OTPs — rather than a general lack of caution. This distinguishes the digital arrest victim profile from typical phishing-link victims, who skew younger and are often targeted through social media or shopping-related lures instead.\n- **Urban concentration, but growing rural spread:** Historically most reported high-value digital arrest cases originated in metro and Tier-1 cities, but NCRP data through 2025–26 shows increasing complaint volumes from Tier-2 and Tier-3 towns as smartphone and UPI penetration deepens in those areas, without a matching rise in localized digital-safety awareness campaigns.",
+    "metadata": {
+      "file": "19_ncrb-i4c_victim-demographics.md",
+      "word_count": 237,
+      "source": "National Crime Records Bureau (NCRB) / I4C Victim Demographics",
+      "topic": "Victim Demographics in Digital Fraud (Age, Occupation Patterns)",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_116",
+    "text": "**Why this matters for the RAG agent's design:** A citizen-facing fraud shield should be able to adapt its tone and detail level depending on the likely user profile — for instance, providing simpler, more explicit warnings for older or first-time digital banking users, and supporting regional languages given the geographic spread beyond English/Hindi-dominant metro users.",
+    "metadata": {
+      "file": "19_ncrb-i4c_victim-demographics.md",
+      "word_count": 55,
+      "source": "National Crime Records Bureau (NCRB) / I4C Victim Demographics",
+      "topic": "Victim Demographics in Digital Fraud (Age, Occupation Patterns)",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_117",
+    "text": "**RAG relevance:** Supports queries like \"who is most at risk from digital arrest scams,\" \"why do scammers target elderly people,\" \"is this scam pattern common among government retirees,\" \"how should awareness messaging differ for older users.\"",
+    "metadata": {
+      "file": "19_ncrb-i4c_victim-demographics.md",
+      "word_count": 36,
+      "source": "National Crime Records Bureau (NCRB) / I4C Victim Demographics",
+      "topic": "Victim Demographics in Digital Fraud (Age, Occupation Patterns)",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_119",
+    "text": "# NCRB/MHA Data: Cross-Border Fraud Networks and Enforcement Outcomes\n\nA distinguishing feature of digital arrest and large-scale UPI fraud networks, reflected in NCRB's cybercrime disposal statistics and repeated MHA disclosures, is that a substantial share of the organised infrastructure operates outside Indian jurisdiction — which materially affects conviction rates and shapes the kind of intelligence tools law enforcement actually needs.",
+    "metadata": {
+      "file": "20_ncrb-mha_cross-border-enforcement-disposal.md",
+      "word_count": 60,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs Enforcement Data",
+      "topic": "Cross-Border Fraud Networks and Case Disposal/Enforcement Outcomes",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_120",
+    "text": "**Case disposal patterns:**\n- NCRB's own published data has historically shown a wide gap between cybercrime cases *registered* and cases that reach *chargesheet or conviction* stage, with pendency rates in cyber-fraud categories running higher than for many traditional crime categories — a gap widely attributed to the cross-jurisdictional and often cross-border nature of the accused networks, the technical complexity of tracing digital money trails through multiple mule accounts, and resource constraints at the state cyber-cell level.\n- Cases where the fraud infrastructure (call centres, script operations) is based abroad — commonly cited regions include parts of Southeast Asia — see substantially lower arrest and conviction rates than domestically-run scams, since extradition and international cooperation processes are slow relative to the speed at which fraud proceeds move and are laundered.\n- Conversely, enforcement actions targeting the **domestic** end of these networks — money mule account holders, local agents recruiting mules, and SIM-card procurement rings — have driven the majority of arrests and asset freezes, even when the organisers themselves remain outside the country.",
+    "metadata": {
+      "file": "20_ncrb-mha_cross-border-enforcement-disposal.md",
+      "word_count": 172,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs Enforcement Data",
+      "topic": "Cross-Border Fraud Networks and Case Disposal/Enforcement Outcomes",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_121",
+    "text": "**Enforcement measures with measurable scale (per MHA disclosures, cumulative through 2025–26):**\n- Hundreds of thousands of mobile numbers and mule bank accounts have been blocked/frozen across coordinated actions between I4C, telecom operators, and banks.\n- A large number of mobile handsets (device IMEIs) linked to fraud operations have been blacklisted, preventing their reuse on Indian telecom networks even with a new SIM.\n- An inter-ministerial coordination mechanism, formed in 2024, brings together Home Affairs, External Affairs, and telecom regulators specifically to pursue cross-border components of these fraud networks, reflecting recognition that domestic-only enforcement cannot fully address the problem.",
+    "metadata": {
+      "file": "20_ncrb-mha_cross-border-enforcement-disposal.md",
+      "word_count": 98,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs Enforcement Data",
+      "topic": "Cross-Border Fraud Networks and Case Disposal/Enforcement Outcomes",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_122",
+    "text": "**Why this matters for the hackathon's platform design:** Since prosecution-stage outcomes lag far behind the scale of the fraud, an AI intelligence platform's highest-value contribution is realistically in the **pre-transaction / early-detection** stage (flagging a scam before money moves, freezing mule accounts within the first hours) rather than post-hoc case resolution — directly matching the problem statement's framing that \"intelligence before mass victimisation\" is what's missing, not evidence after the fact.",
+    "metadata": {
+      "file": "20_ncrb-mha_cross-border-enforcement-disposal.md",
+      "word_count": 71,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs Enforcement Data",
+      "topic": "Cross-Border Fraud Networks and Case Disposal/Enforcement Outcomes",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "chunk_123",
+    "text": "**RAG relevance:** Supports queries like \"why don't fraud cases get resolved quickly,\" \"where are these scam operations usually based,\" \"what has the government done to freeze mule accounts,\" \"why is early reporting more important than post-fraud investigation.\"",
+    "metadata": {
+      "file": "20_ncrb-mha_cross-border-enforcement-disposal.md",
+      "word_count": 37,
+      "source": "National Crime Records Bureau (NCRB) / Ministry of Home Affairs Enforcement Data",
+      "topic": "Cross-Border Fraud Networks and Case Disposal/Enforcement Outcomes",
+      "url": "https://www.ncrb.gov.in/",
+      "last_verified": "2026-07"
+    }
+  }
+]
