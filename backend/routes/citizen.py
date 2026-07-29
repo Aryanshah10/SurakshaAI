@@ -37,8 +37,8 @@ def citizen_query(body: CitizenQueryRequest):
             detail=f"Language '{body.language}' not supported. Supported: {SUPPORTED_LANGUAGES}"
         )
  
-    # Retrieve relevant chunks from FAISS
-    context, sources = query_rag(body.question)
+    # Retrieve relevant chunks from FAISS (with reranker + threshold)
+    context, sources, _distances = query_rag(body.question)
  
     language_name = LANGUAGE_NAMES.get(body.language, "English")
  

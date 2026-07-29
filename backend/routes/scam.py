@@ -22,7 +22,7 @@ def _get_rag_answer(user_text: str) -> str:
     """
     try:
         from utils.rag_engine import query_rag
-        context, sources = query_rag(user_text)
+        context, sources, _distances = query_rag(user_text)
 
         if not context or not context.strip():
             return "Stay cautious. Verify caller identity through official channels. For help, call 1930."

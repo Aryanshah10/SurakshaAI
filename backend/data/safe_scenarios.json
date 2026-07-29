@@ -1,0 +1,182 @@
+[
+  {
+    "id": "safe_001",
+    "text": "Splitting shared expenses among friends via UPI is a normal and safe practice. When a group of friends goes out for dinner, one person may pay the bill and the others transfer their share using UPI or other digital payment methods. This is a legitimate financial transaction and not a scam. However, always verify the UPI ID before sending money.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Legitimate UPI Transfers — Friends Splitting Bills",
+      "category": "safe",
+      "scenario_type": "peer-to-peer_transaction",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_002",
+    "text": "Restaurants sometimes ask for an advance deposit or token amount to confirm a reservation, particularly for large groups, special occasions, or during peak seasons (New Year, Diwali, weddings). This is a standard business practice and not fraud. Look for the restaurant's verified website or app to make such payments, and confirm the amount through a direct call to the restaurant's published phone number, not a number sent via WhatsApp or SMS.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Restaurant Reservation Deposits",
+      "category": "safe",
+      "scenario_type": "deposit_booking",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_003",
+    "text": "Event booking platforms and organizers commonly charge registration fees, booking fees, or token advances for concerts, conferences, workshops, and community events. Official event pages on platforms like BookMyShow, Insider.in, or the organizer's own website are generally safe. The key indicator is verifying that you are on the official platform — check the URL carefully, avoid clicking ads or social media links directly, and type the known URL yourself.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Event Booking and Registration Fees",
+      "category": "safe",
+      "scenario_type": "deposit_booking",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_004",
+    "text": "Family members regularly send and receive money through UPI for household expenses, gifts, school fees, medical expenses, and everyday needs. A parent sending money to a child's hostel fees, a sibling transferring funds for a family event, or a relative sending money for a festival gift are all routine and legitimate transactions. The distinguishing factor is that the recipient is a known family member and the transaction is expected.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Family Money Transfers",
+      "category": "safe",
+      "scenario_type": "peer-to-peer_transaction",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_005",
+    "text": "Colleagues often share costs for shared taxis or auto-rickshaws to work, ordering team lunches together, or pooling funds for office collections (birthday gifts, farewells). One person typically makes the payment and others reimburse their share via UPI. This is a safe and common practice. The key safeguard is confirming the UPI ID matches the colleague you know.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Workplace Expense Sharing",
+      "category": "safe",
+      "scenario_type": "peer-to-peer_transaction",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_006",
+    "text": "Landlords collecting monthly rent through UPI or bank transfer is a standard practice in India. Many tenants pay their rent digitally each month. This is safe when you have a signed rental agreement and know your landlord personally or through a verified property platform. Always pay to the UPI ID or bank account specified in your rental agreement.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Rent Payments via UPI",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_007",
+    "text": "Schools and colleges in India collect fees through UPI, online payment gateways, or bank transfers. Official fee payment portals are linked from the institution's verified website. Notices sent through official school communication channels (authorized WhatsApp groups, official email, or the school's ERP system) regarding fee payment are legitimate. Parents should verify by checking the school's official website or contacting the school office directly if unsure.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Educational Institution Fee Payments",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_008",
+    "text": "Insurance premium payments via UPI or online banking are routine transactions. Life insurance, health insurance, vehicle insurance, and general insurance providers issue renewal notices and offer digital payment options through their official apps or websites. A genuine insurance company will never ask you to pay to an individual's personal UPI ID — premiums should be paid to the company's registered business account or through the official payment gateway.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Insurance Premium Payments",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_009",
+    "text": "E-commerce transactions on established platforms like Amazon, Flipkart, Myntra, Ajio, and Meesho are generally safe. These platforms use secure payment gateways and provide order tracking and refund mechanisms. A genuine purchase involves selecting items, adding to cart, and paying through the platform's integrated checkout — not through external links or direct UPI transfers to individual sellers. Always verify you are on the official website or app before entering payment details.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "E-commerce Purchases on Verified Platforms",
+      "category": "safe",
+      "scenario_type": "online_purchase",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_010",
+    "text": "Government fee payments such as passport application fees, income tax payments, property tax, water and electricity bills, and traffic challans are collected through secure official portals (e.g., Bharat Bill Payment System, government e-portals, or authorized collection centers). These payments are legitimate and safe when made through the official website. Government agencies never ask for payment through personal UPI IDs or demand immediate payment over a phone call.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Government Fee and Utility Bill Payments",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_011",
+    "text": "Friends sending money as a gift for birthdays, weddings, festivals (Diwali, Eid, Pongal, Christmas), or as a return of a previous loan or shared expense is a normal peer-to-peer transaction. Requests to send money that come from a known number and are expected (because of a prior conversation or arrangement) are generally safe. The red flag is an unexpected request from a known number under unusual circumstances — which could mean the person's account is compromised.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Peer-to-Peer Gifts and Loan Repayments",
+      "category": "safe",
+      "scenario_type": "peer-to-peer_transaction",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_012",
+    "text": "Subscription services like Netflix, Amazon Prime, Hotstar, Spotify, and Zomato Pro charge recurring fees through UPI auto-pay or card payments. These are legitimate recurring transactions set up by the user. A genuine subscription service will never call you to demand payment immediately or threaten account suspension unless you pay through an unofficial link. Always manage subscriptions through the app or website directly.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Digital Subscription Payments",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_013",
+    "text": "Charity donations to registered and verified non-profit organizations through their official websites or recognized fundraising platforms (like GiveIndia, Milaap, Ketto) are legitimate. Always verify the charity's registration and look for transparent reporting of how donations are used. Beware of emotional appeals through unsolicited messages or calls — genuine charities do not pressure immediate donations through personal UPI IDs.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Verified Charity Donations",
+      "category": "safe",
+      "scenario_type": "donation",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_014",
+    "text": "Toll payments for national highways through FASTag are a legitimate and mandatory system in India. FASTag is linked to a prepaid account and automatic deduction happens when passing through toll plazas. SMS or email alerts from the National Highway Authority of India (NHAI) or your FASTag issuer about low balance are legitimate. However, links asking to 'recharge FASTag' from unknown numbers may be phishing — always use the official issuer app or website.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "FASTag Toll Payments",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  },
+  {
+    "id": "safe_015",
+    "text": "Hospital and clinic payments for medical consultations, diagnostic tests, treatments, and pharmacy bills are routinely collected via UPI and digital payments. Reputable hospitals provide official payment receipts and QR codes at the billing counter. The risk appears when a caller claiming to be from a hospital asks for emergency payment via a personal UPI ID — always verify by visiting the hospital in person or calling the hospital's published landline number.",
+    "metadata": {
+      "file": "safe_scenarios.json",
+      "source": "Citizen Safety Knowledge Base — Safe Scenarios",
+      "topic": "Hospital and Medical Fee Payments",
+      "category": "safe",
+      "scenario_type": "regular_payment",
+      "last_verified": "2026-07"
+    }
+  }
+]
