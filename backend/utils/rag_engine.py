@@ -1,4 +1,10 @@
 import json
+import os
+
+# Disable Xet storage — the hf_xet DLL is blocked on this machine.
+# Forces HuggingFace hub to use standard HTTP download / local cache.
+os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
+
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -9,12 +15,14 @@ _model  = None
 _index  = None
 _chunks = None
 
+_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+
 def _load():
     global _model, _index, _chunks
     if _model is None:
         _model  = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
-        _index  = faiss.read_index("../data/index.faiss")
-        with open("../data/chunks_map.json") as f:
+        _index  = faiss.read_index(os.path.join(_DATA_DIR, "index.faiss"))
+        with open(os.path.join(_DATA_DIR, "chunks_map.json")) as f:
             _chunks = json.load(f)
 
 def query_rag(question: str, top_k: int = TOP_K):

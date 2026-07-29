@@ -1,21 +1,18 @@
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
-
+ 
 from fastapi import APIRouter, HTTPException
 from models.schemas import CitizenQueryRequest, CitizenQueryResponse, ScamAssessRequest, ScamAssessResponse
 from routes.scam import assess_scam
 from utils.rag_engine import query_rag
-from openai import OpenAI
+from groq import Groq
 import os
-
+ 
 router = APIRouter(prefix="/api/citizen", tags=["Citizen Shield"])
-client = OpenAI(
-    base_url=os.getenv("OMNIROUTE_URL", "http://localhost:20128/v1"),
-    api_key=os.getenv("OMNIROUTE_API_KEY") 
-)
-
-SUPPORTED_LANGUAGES = ["en", "hi", "mr", "bn", "te", "ta", "gu", "kn", "ml", "pa", "od", "ur"]
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 LANGUAGE_NAMES = {
     "en": "English",
@@ -45,6 +42,20 @@ def citizen_query(body: CitizenQueryRequest):
  
     language_name = LANGUAGE_NAMES.get(body.language, "English")
  
+    if not client:
+        answer = (
+            f"Advisory: {context[:500]}..."
+            if context
+            else "Service temporarily unavailable. Call 1930 for immediate assistance."
+        )
+        return CitizenQueryResponse(
+            answer=answer,
+            language=body.language,
+            source_references=sources,
+            suggested_action="File complaint at cybercrime.gov.in",
+            helpline="1930",
+        )
+
     prompt = f"""You are a citizen safety assistant for an Indian government fraud-detection platform.
 Answer the question using ONLY the context below.
 Be concise and clear. Use simple language suitable for any age group.
@@ -60,14 +71,14 @@ Answer in {language_name}:"""
  
     try:
         response = client.chat.completions.create(
-            model=os.getenv("OMNIROUTE_MODEL", "google/gemini-2.5-flash"),
+            model=GROQ_MODEL,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=300,
         )
         answer = response.choices[0].message.content.strip()
  
     except Exception as e:
-        # OmniRoute down — return context directly as fallback
+        # LLM down — return context directly as fallback
         answer = (
             f"Advisory: {context[:500]}..."
             if context

@@ -7,8 +7,62 @@ from models.schemas import ScamAssessRequest, ScamAssessResponse, RiskLevel
 from utils.auth import require_officer
 from utils.scam_engine import detect_call, generate_mha_alert
 from routes.websocket import broadcast_alert, alert_history
+import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/scam", tags=["Scam Detection"])
+
+
+def _get_rag_answer(user_text: str) -> str:
+    """
+    Runs RAG retrieval + LLM to produce a contextual advisory answer.
+    Falls back to a static message if RAG or LLM is unavailable.
+    """
+    try:
+        from utils.rag_engine import query_rag
+        context, sources = query_rag(user_text)
+
+        if not context or not context.strip():
+            return "Stay cautious. Verify caller identity through official channels. For help, call 1930."
+
+        # Try LLM-powered answer
+        try:
+            from openai import OpenAI
+            client = OpenAI(
+                base_url=os.getenv("OMNIROUTE_URL", "http://localhost:20128/v1"),
+                api_key=os.getenv("OMNIROUTE_API_KEY"),
+            )
+            prompt = f"""You are a citizen safety assistant for an Indian government fraud-detection platform.
+The citizen has sent a message. Answer helpfully using the context below.
+Be concise and clear. Use simple language. Keep the response under 150 words.
+If the topic involves fraud or scams, end with: "For help, call national cybercrime helpline 1930."
+
+Context:
+{context}
+
+Citizen message: {user_text}
+
+Answer:"""
+
+            response = client.chat.completions.create(
+                model=os.getenv("OMNIROUTE_MODEL", "google/gemini-2.5-flash"),
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=200,
+                temperature=0.3,
+            )
+            return response.choices[0].message.content.strip()
+
+        except Exception as e:
+            logger.warning(f"[scam] LLM call failed, returning RAG context directly: {e}")
+            # Fallback: return the raw RAG context truncated
+            return f"Advisory: {context[:400]}... For help, call 1930."
+
+    except Exception as e:
+        logger.warning(f"[scam] RAG retrieval failed: {e}")
+        return "Stay cautious. Verify caller identity through official channels. For help, call 1930."
+
 
 def _build_response(turns: list) -> tuple[ScamAssessResponse, dict | None]:
     """
@@ -40,17 +94,22 @@ def _build_response(turns: list) -> tuple[ScamAssessResponse, dict | None]:
             f"{', '.join(red_flags[:3]) if red_flags else 'scam patterns detected'}. "
             f"Filing this complaint on the National Cybercrime Reporting Portal."
         )
+
+    # For high/critical risk: urgent action message
+    # For low/medium risk: run RAG to give a helpful contextual answer
+    if risk in [RiskLevel.high, RiskLevel.critical]:
+        recommended = "DO NOT pay anything. Hang up and call 1930 immediately."
+    else:
+        # Use RAG + LLM for a contextual, helpful response
+        full_text = " ".join(turns)
+        recommended = _get_rag_answer(full_text)
  
     response = ScamAssessResponse(
         risk_level=risk,
         confidence=round(score, 2),
         scam_type="digital_arrest" if score > 0.5 else "unknown",
         red_flags=red_flags,
-        recommended_action=(
-            "DO NOT pay anything. Hang up and call 1930 immediately."
-            if risk in [RiskLevel.high, RiskLevel.critical]
-            else "Stay cautious. Verify caller identity through official channels."
-        ),
+        recommended_action=recommended,
         ncrb_draft=ncrb_draft,
     )
  
@@ -74,6 +133,7 @@ async def assess_scam(body: ScamAssessRequest):
     Citizen or officer pastes suspicious call transcript or message.
     Returns risk level, red flags, and pre-filled NCRB complaint draft.
     Uses two-layer detection: rule-based + OmniRoute LLM for gray zone.
+    For low-risk inputs, uses RAG retrieval + LLM to give contextual advisory.
     """
     # Split multi-turn transcript by newline; single message treated as one turn
     turns = [t.strip() for t in body.text.split("\n") if t.strip()] or [body.text]

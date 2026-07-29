@@ -1,3 +1,12 @@
+import os
+
+# Load .env before anything else
+from dotenv import load_dotenv
+load_dotenv()
+
+# Disable Xet storage globally — hf_xet DLL is blocked by App Control policy.
+os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field

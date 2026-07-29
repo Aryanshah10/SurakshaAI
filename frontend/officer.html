@@ -524,122 +524,271 @@
       background: var(--safe);
     }
 
-    /* Currency Scanner Section styling */
-    .scanner-split-layout {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 28px;
+    /* Currency Scanner Section styling — Interactive Scanner */
+    .scanner-container {
+      background: var(--surface-2);
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 10px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
     }
 
-    .audit-card,
-    .audit-details-card {
-      background: var(--surface);
+    .scanner-body {
+      position: relative;
+      background: var(--surface-3);
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 24px;
+      border-radius: 8px;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .audit-card h3,
-    .audit-details-card h3 {
-      font-family: var(--font-display);
-      font-size: 16px;
-      color: #fff;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--line);
-      margin-top: 0;
-    }
-
-    .table-container {
-      overflow-x: auto;
-    }
-
-    .audit-table {
+    .note-viewport {
+      position: relative;
       width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-family: var(--font-mono);
-      font-size: 12.5px;
+      max-width: 580px;
+      height: 240px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      margin: 0 auto;
+      cursor: pointer;
     }
 
-    .audit-table th {
-      color: var(--muted-2);
+    .note-graphic {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      transition: all 0.3s ease;
+    }
+
+    .note-details-generic {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1f2d3d 0%, #0d1b2a 100%);
+      color: var(--muted);
+      padding: 16px;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .note-val {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      font-size: 32px;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .note-title {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
       font-weight: 600;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
+      font-family: var(--font-body);
     }
 
-    .audit-table td {
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    .note-gandhi {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .audit-table tr.flagged-row td {
-      background: rgba(229, 72, 77, 0.03);
+    .note-gandhi::before {
+      content: 'Gandhi';
+      font-size: 11px;
+      font-family: var(--font-mono);
+      opacity: 0.7;
     }
 
-    .lbl-status {
-      font-size: 10px;
+    .note-thread {
+      position: absolute;
+      left: 36%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #2f9f7a 0%, #217357 50%, #2f9f7a 100%);
+      box-shadow: 0 0 8px rgba(47, 190, 143, 0.6);
+      transition: background 0.3s ease;
+    }
+
+    .scan-laser {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #2fbe8f;
+      box-shadow: 0 0 16px 4px rgba(47, 190, 143, 0.8);
+      z-index: 5;
+      top: 0;
+      display: none;
+    }
+
+    @keyframes laserMove {
+      0% { top: 0%; }
+      50% { top: 100%; }
+      100% { top: 0%; }
+    }
+
+    .note-viewport.scanning .scan-laser {
+      display: block;
+      animation: laserMove 2s infinite ease-in-out;
+    }
+
+    .scanner-controls {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-scan {
+      width: 100%;
+      padding: 12px;
+      background: var(--safe);
+      border: 1px solid var(--safe);
+      color: #080d17;
+      font-weight: 700;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-scan:hover {
+      background: rgba(47, 190, 143, 0.85);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(47, 190, 143, 0.2);
+    }
+
+    .btn-scan:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .scan-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--surface-3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--safe);
+      border-radius: 3px;
+      transition: width 0.1s linear;
+    }
+
+    .progress-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .scan-results {
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .status-badge {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      padding: 3px 8px;
-      border-radius: 3px;
-      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
     }
 
-    .lbl-status.genuine {
+    .status-badge.genuine {
       background: rgba(47, 190, 143, 0.12);
       color: var(--safe);
       border: 1px solid rgba(47, 190, 143, 0.3);
     }
 
-    .lbl-status.counterfeit {
-      background: rgba(229, 72, 77, 0.12);
+    .status-badge.counterfeit {
+      background: rgba(229, 72, 77, 0.15);
       color: var(--danger);
       border: 1px solid rgba(229, 72, 77, 0.35);
     }
 
-    .checkpoint-list {
-      list-style: none;
+    .result-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      padding: 0;
-      margin: 0;
+      gap: 14px;
     }
 
-    .checkpoint-list li {
-      font-size: 13.5px;
-      padding-left: 20px;
-      position: relative;
+    .result-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
     }
 
-    .checkpoint-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 6px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .checkpoint-list li.check-passed::before {
-      background: var(--safe);
-    }
-
-    .checkpoint-list li.check-failed::before {
-      background: var(--danger);
-    }
-
-    .checkpoint-list strong {
-      color: #fff;
+    .result-item strong {
+      font-size: 14px;
+      color: var(--text);
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
-    .checkpoint-list span {
+    .confidence {
+      font-family: var(--font-mono);
+      font-size: 12px;
       color: var(--muted);
+    }
+
+    .result-item p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 992px) {
+      .scanner-container { padding: 20px; }
+      .note-viewport { height: 180px; }
     }
 
     /* Network Graph style */
@@ -1051,72 +1200,56 @@
 
         <!-- View 4: Currency Scanner Panel -->
         <div class="dashboard-panel" id="panel-scanner" style="display: none;">
-          <h2>Forensic Banknote Audit Log</h2>
-          <p class="section-desc">Audit submissions logged by merchants or citizens verifying security thread OVI
-            features and Gandhi profiles.</p>
+          <h2>Forensic Banknote Scanner</h2>
+          <p class="section-desc">Upload a banknote image to verify its authenticity using AI-powered analysis of watermarks, security threads, and microprinting.</p>
 
-          <div class="scanner-split-layout">
-            <div class="audit-card">
-              <h3>Banknote Submissions</h3>
-              <div class="table-container">
-                <table class="audit-table">
-                  <thead>
-                    <tr>
-                      <th>Timestamp</th>
-                      <th>Serial Number</th>
-                      <th>Value</th>
-                      <th>Confidence</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>2026-07-22 10:30</td>
-                      <td>4AP*392013</td>
-                      <td>₹500</td>
-                      <td class="safe-color">99.8%</td>
-                      <td><span class="lbl-status genuine">GENUINE</span></td>
-                    </tr>
-                    <tr class="flagged-row">
-                      <td>2026-07-22 09:15</td>
-                      <td>7DF*210459</td>
-                      <td>₹500</td>
-                      <td class="danger-color">42.1%</td>
-                      <td><span class="lbl-status counterfeit">COUNTERFEIT</span></td>
-                    </tr>
-                    <tr>
-                      <td>2026-07-21 18:22</td>
-                      <td>1EC*908722</td>
-                      <td>₹200</td>
-                      <td class="safe-color">98.5%</td>
-                      <td><span class="lbl-status genuine">GENUINE</span></td>
-                    </tr>
-                  </tbody>
-                </table>
+          <div class="scanner-container">
+            <div class="scanner-body">
+              <div class="note-viewport" id="noteViewport" onclick="officerTriggerUpload()">
+                <div class="scan-laser"></div>
+
+                <!-- Upload prompt overlay -->
+                <div id="uploadPrompt"
+                  style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(8, 13, 23, 0.7); z-index: 5; text-align: center; padding: 20px; transition: opacity 0.25s ease;">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--alert)" stroke-width="2"
+                    style="margin-bottom: 10px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <strong style="color: #fff; font-size: 13.5px; font-family: var(--font-body);">Click to Upload Note Image</strong>
+                  <span style="font-size: 10.5px; color: var(--muted); margin-top: 4px; font-family: var(--font-body);">JPG, PNG, WEBP supported</span>
+                </div>
+
+                <div class="note-graphic" id="noteGraphic">
+                  <div class="note-details-generic" id="noteDetailsGeneric">
+                    <span class="note-val">₹</span>
+                    <span class="note-title">RESERVE BANK OF INDIA</span>
+                    <div class="note-gandhi"></div>
+                    <div class="note-thread"></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="audit-details-card">
-              <h3>Forensic Audit Diagnostics</h3>
-              <ul class="checkpoint-list">
-                <li class="check-passed">
-                  <strong>Microprinting verification</strong>
-                  <span>OK - RBI inscriptions are fully readable under 10x visual zoom.</span>
-                </li>
-                <li class="check-failed">
-                  <strong>Optically Variable Ink (OVI) Thread</strong>
-                  <span class="danger-color">FAIL - Color shift parameters do not match Indian Banknote
-                    standards.</span>
-                </li>
-                <li class="check-passed">
-                  <strong>Watermark diagnostic</strong>
-                  <span>OK - Portrait watermarks match correct 3D depth indexes.</span>
-                </li>
-                <li class="check-failed">
-                  <strong>Paper fiber test</strong>
-                  <span class="danger-color">FAIL - Fluorescence profile suggests synthetic printing paper.</span>
-                </li>
-              </ul>
+            <div class="scanner-controls">
+              <input type="file" id="noteImageInput" accept="image/jpeg,image/png,image/jpg,image/webp"
+                style="display: none;" onchange="officerHandleFileSelect(event)" />
+              <button type="button" class="btn-scan" id="btnScan" onclick="officerStartScan()">
+                Start AI Verification
+              </button>
+              <div class="scan-progress" id="scanProgress" style="display: none;">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-status" id="progressStatus">Analyzing note...</span>
+              </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div class="scan-results" id="scanResults" style="display: none;">
+              <div class="result-header" id="resultHeader"></div>
+              <div class="result-list" id="resultList"></div>
             </div>
           </div>
         </div>
@@ -1688,6 +1821,171 @@
       localStorage.removeItem("officer");
       window.location.href = "login.html";
     });
+
+    // ─── Currency Scanner Functions ───────────────────────────────
+    let officerUploadedNote = null;
+
+    function officerTriggerUpload() {
+      if (document.getElementById('btnScan').disabled) return;
+      document.getElementById('noteImageInput').click();
+    }
+
+    function officerHandleFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      officerUploadedNote = file;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const noteGraphic = document.getElementById('noteGraphic');
+        noteGraphic.style.backgroundImage = `url(${e.target.result})`;
+        noteGraphic.style.backgroundSize = 'contain';
+        noteGraphic.style.backgroundPosition = 'center';
+        noteGraphic.style.backgroundRepeat = 'no-repeat';
+
+        const gen = document.getElementById('noteDetailsGeneric');
+        if (gen) gen.style.opacity = '0.04';
+        document.getElementById('uploadPrompt').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('uploadPrompt').style.display = 'none';
+        }, 250);
+      };
+      reader.readAsDataURL(file);
+
+      document.getElementById('scanResults').style.display = 'none';
+    }
+
+    function officerStartScan() {
+      if (!officerUploadedNote) {
+        alert("Please upload a banknote image first by clicking on the scanner area!");
+        officerTriggerUpload();
+        return;
+      }
+
+      const btnScan = document.getElementById('btnScan');
+      const scanProgress = document.getElementById('scanProgress');
+      const progressFill = document.getElementById('progressFill');
+      const progressStatus = document.getElementById('progressStatus');
+      const scanResults = document.getElementById('scanResults');
+      const noteViewport = document.getElementById('noteViewport');
+
+      btnScan.disabled = true;
+      scanResults.style.display = 'none';
+      scanProgress.style.display = 'block';
+      progressFill.style.width = '0%';
+      noteViewport.classList.add('scanning');
+
+      let progress = 0;
+      const stages = [
+        { threshold: 25, label: "Extracting RGB channels and UV fluorescence spectra..." },
+        { threshold: 55, label: "Analyzing watermark alignment indexes..." },
+        { threshold: 85, label: "Verifying security thread micro-inscriptions..." },
+        { threshold: 100, label: "Scan complete!" }
+      ];
+
+      let scanData = null;
+      let apiError = null;
+
+      const formData = new FormData();
+      formData.append('file', officerUploadedNote);
+
+      fetch('http://localhost:8000/api/currency/scan', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => {
+          if (!res.ok) return res.text().then(t => { throw new Error(t); });
+          return res.json();
+        })
+        .then(data => {
+          scanData = data;
+        })
+        .catch(err => {
+          console.error('[scan] API error:', err);
+          apiError = err.message;
+        });
+
+      const interval = setInterval(() => {
+        if (progress >= 90 && !scanData && !apiError) {
+          return;
+        }
+
+        progress += 2;
+        progressFill.style.width = `${progress}%`;
+
+        const currentStage = stages.find(s => progress <= s.threshold);
+        if (currentStage) {
+          progressStatus.textContent = currentStage.label;
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          noteViewport.classList.remove('scanning');
+          scanProgress.style.display = 'none';
+          btnScan.disabled = false;
+
+          if (apiError) {
+            alert("Unable to complete AI check. Falling back to offline advisory. Helpline: 1930");
+            return;
+          }
+
+          const resultHeader = document.getElementById("resultHeader");
+          const resultList = document.getElementById("resultList");
+
+          if (scanData.is_genuine) {
+            resultHeader.innerHTML = `
+                <span class="status-badge genuine">● VERIFIED GENUINE</span>
+                <span class="confidence">${(scanData.confidence * 100).toFixed(0)}% Match</span>
+              `;
+            resultList.innerHTML = `
+                <div class="result-item">
+                  <span style="color: var(--safe); font-weight: bold; margin-right: 8px;">✓</span>
+                  <div>
+                    <strong>Security Verification Passed</strong>
+                    <p>Verified Mahatma Gandhi watermark alignment, OVI security thread, and microtext details.</p>
+                  </div>
+                </div>
+                <div class="result-item">
+                  <span style="color: var(--safe); font-weight: bold; margin-right: 8px;">✓</span>
+                  <div>
+                    <strong>Fluorescence Profile</strong>
+                    <p>${scanData.uv_simulation_note}</p>
+                  </div>
+                </div>
+              `;
+          } else {
+            resultHeader.innerHTML = `
+                <span class="status-badge counterfeit">● FLAGGED SUSPECT / COUNTERFEIT</span>
+                <span style="color: var(--danger); font-weight: bold;">${(scanData.confidence * 100).toFixed(0)}% Match</span>
+              `;
+
+            let flagItemsHtml = scanData.red_flags.map(flag => `
+                <div class="result-item">
+                  <span style="color: var(--danger); font-weight: bold; margin-right: 8px;">✗</span>
+                  <div>
+                    <strong>Security Red Flag</strong>
+                    <p style="color: var(--danger); margin: 2px 0 0;">${flag}</p>
+                  </div>
+                </div>
+              `).join('');
+
+            resultList.innerHTML = `
+                ${flagItemsHtml}
+                <div class="result-item">
+                  <span style="color: var(--danger); font-weight: bold; margin-right: 8px;">✗</span>
+                  <div>
+                    <strong>Fluorescence Pattern Warning</strong>
+                    <p>${scanData.uv_simulation_note}</p>
+                  </div>
+                </div>
+              `;
+          }
+
+          scanResults.style.display = 'block';
+        }
+      }, 50);
+    }
   </script>
 </body>
 

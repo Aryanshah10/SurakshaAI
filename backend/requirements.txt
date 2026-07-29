@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-
 python-dotenv
 python-multipart
 python-jose[cryptography]
@@ -16,6 +15,7 @@ pandas
 scikit-learn
 imbalanced-learn
 
+
 aiofiles
 websockets
 
@@ -27,6 +27,10 @@ langchain-community
 sentence-transformers
 
 openai
+groq
+twilio
+langdetect
+pyngrok
 
 bcrypt==4.0.1
 ultralytics

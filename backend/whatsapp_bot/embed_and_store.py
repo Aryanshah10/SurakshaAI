@@ -17,7 +17,7 @@ from sentence_transformers import SentenceTransformer
 from pathlib import Path
 
 # ---------- CONFIG ----------
-CHUNKS_JSON_PATH = "./backend/data/chunks.json"   # <-- update to your actual chunks file path
+CHUNKS_JSON_PATH = "./backend/data/chunks_map.json"   # <-- update to your actual chunks file path
 CHROMA_DB_PATH = "./chroma_db"            # local persistent storage folder
 COLLECTION_NAME = "citizen_fraud_shield"
 EMBEDDING_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"   # multilingual (50+ languages), 384-dim
