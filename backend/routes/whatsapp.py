@@ -15,6 +15,7 @@ Twilio sandbox setup:
 """
 
 import os
+import re
 import json
 import logging
 from typing import Optional
@@ -43,6 +44,7 @@ EMOJI_MAP = {
     "Suspicious": "\U0001F7E1",
     "Safe": "\U0001F7E2",
     "Need More Information": "\U0001F535",
+    "Information": "\U0001F4D6",
 }
 
 ERROR_MESSAGES = {
@@ -93,6 +95,83 @@ def get_error_message(language_name: Optional[str]) -> str:
     return ERROR_MESSAGES.get(language_name, ERROR_MESSAGES["English"])
 
 
+# ─── Greeting & About-Bot Detection ───────────────
+
+_GREETING_PATTERNS = [
+    "hi", "hello", "hey", "heyo", "hola", "hii", "hiii", "helloo",
+    "how are you", "how r u", "hru", "howdy", "sup", "wassup", "what's up",
+    "good morning", "good evening", "good afternoon", "good night",
+    "namaste", "namaskar", "namaskaram", "pranam", "vanakkam",
+    "nomoshkar", "sat sri akal", "jal shree",
+    "kaise ho", "kya haal hai", "kya kar rahe ho", "kese ho",
+    "sab theek", "kaisa hai", "namaskara",
+]
+
+_ABOUT_BOT_PATTERNS = [
+    r"what\s+do\s+(you|u)\s+do",
+    r"what\s+(can|all)\s+(you|u)\s+do",
+    r"what\s+(is|are)\s+(your|ur)\s+(purpose|job|work|role)",
+    r"who\s+are\s+(you|u)",
+    r"tell\s+me\s+(about|abt)\s+(yourself|urself|you|u)",
+    r"introduce\s+(yourself|urself|you|u)",
+    r"what\s+is\s+(this|the)\s+bot",
+    r"what\s+is\s+(this|the)\s+number",
+    r"kaun\s+ho\s+(tum|aap)",
+    r"aap\s+kya\s+karte\s+ho",
+    r"aap\s+kaun\s+ho",
+    r"aapke?\s+baare\s+mein\s+batao",
+    r"yeh\s+kya\s+(hai|he)",
+    r"yeh\s+number\s+kiska\s+(hai|he)",
+    r"bot\s+kya\s+karta\s+(hai|he)",
+    r"aap\s+kya\s+hain?",
+    r"yeh\s+kaam\s+kya\s+(hai|he)",
+    r"what\s+are\s+you",
+    r"whats?\s+your\s+name",
+    r"tu\s+kaun\s+(hai|he)",
+    r"tum\s+kaun\s+ho",
+    r"kaun\s+ho\s+(you|app|aap)",
+]
+
+
+def _is_greeting(text: str) -> bool:
+    """Check if the user is just greeting the bot."""
+    lower = text.lower().strip().rstrip("!?.,;:")
+    if lower in _GREETING_PATTERNS:
+        return True
+    # Also match if message STARTS with a greeting (e.g. "hi there", "hello everyone")
+    first_word = lower.split()[0] if lower.split() else ""
+    return first_word in _GREETING_PATTERNS
+
+
+def _is_about_bot(text: str) -> bool:
+    """Check if the user is asking what the bot does (regex word-boundary matching)."""
+    lower = text.lower().strip().rstrip("!?.,;:")
+    return any(re.search(p, lower) for p in _ABOUT_BOT_PATTERNS)
+
+
+_GREETING_RESPONSE = (
+    "\U0001F44B *Namaste! I'm SurakshaAI, your Citizen Fraud Shield.*\n\n"
+    "I help you identify if a call, message, or payment request is a scam. "
+    "Here's what I can do for you:\n"
+    "\u2022 \U0001F50D Analyze suspicious messages and calls for fraud\n"
+    "\u2022 \U0001F4D6 Explain different types of scams (UPI fraud, digital arrest, OTP scams, etc.)\n"
+    "\u2022 \U0001F6E1\uFE0F Give prevention tips to keep you safe\n"
+    "\u2022 \U0001F4DE Help you report incidents (Helpline: 1930)\n\n"
+    "Just describe your situation or ask me anything about scams!"
+)
+
+_ABOUT_BOT_RESPONSE = (
+    "\U0001F916 *I am SurakshaAI — Citizen Fraud Shield*\n\n"
+    "I'm an AI assistant designed to help Indian citizens identify and protect themselves "
+    "from financial fraud and cyber scams.\n\n"
+    "\U0001F4AC *You can:*\n"
+    "\u2022 Paste a suspicious message or call transcript — I'll analyze it for fraud\n"
+    "\u2022 Ask about scam types — I'll explain how they work with prevention tips\n"
+    "\u2022 Ask for safety advice — I'll guide you on staying safe\n\n"
+    "\U0001F6A8 *Emergency Helpline: 1930* (National Cybercrime Reporting Portal)\n"
+)
+
+
 @router.post("/whatsapp")
 async def whatsapp_webhook(
     Body: str = Form(...),
@@ -107,15 +186,31 @@ async def whatsapp_webhook(
             media_type="application/xml",
         )
 
+    # ── Pre-processing: Greetings & About-Bot ──
+    if _is_greeting(user_message):
+        return Response(
+            content=build_twiml(_GREETING_RESPONSE),
+            media_type="application/xml",
+        )
+    if _is_about_bot(user_message):
+        return Response(
+            content=build_twiml(_ABOUT_BOT_RESPONSE),
+            media_type="application/xml",
+        )
+
     detected_lang, failed = detect_language(user_message)
 
     if failed or not detected_lang:
-        clarify = (
-            "We could not detect your language. Please reply with your preferred language:\n"
-            "Hindi / Tamil / Telugu / Marathi / Bengali / "
-            "Gujarati / Kannada / Malayalam / Punjabi / Odia / Urdu / English"
+        unclear = (
+            "\U0001F937\u200D\u2642\uFE0F I'm sorry, I couldn't fully understand your message. "
+            "It seems outside my area of expertise.\n\n"
+            "I specialize in helping citizens identify fraud and scams related to "
+            "suspicious calls, messages, and payment requests.\n\n"
+            "If you've received something suspicious, please describe it to me and I'll help you. "
+            "You can message me in: Hindi, English, Tamil, Telugu, Marathi, Bengali, "
+            "Gujarati, Kannada, Malayalam, Punjabi, Odia, or Urdu."
         )
-        return Response(content=build_twiml(clarify), media_type="application/xml")
+        return Response(content=build_twiml(unclear), media_type="application/xml")
 
     # RAG retrieval with similarity threshold + reranker
     try:
@@ -137,9 +232,23 @@ You will be given:
 2. Reference material from verified advisories (CERT-In, RBI, NCRB) AND safe scenarios.
 
 Your job:
-- Classify the situation as one of: "Fraud", "Suspicious", "Safe", OR "Need More Information".
+- Classify the situation as one of: "Fraud", "Suspicious", "Safe", OR "Need More Information", OR "Information".
 - Use "Need More Information" when the user's description is too vague, unrelated to the reference material,
   or the reference material does not clearly match the situation. This is a safe fallback to avoid false alarms.
+- **Use "Information" when the user is asking for educational information or explanation** about a scam/fraud type.
+  Examples: "what is UPI scam", "tell me about digital arrest", "explain OTP fraud", "how does phishing work",
+  "UPI scam kya hai", "digital arrest ke baare mein batao". These are NOT incident reports — they are learning requests.
+- For "Information" verdict: provide a clear explanation of what the scam is, how it works, red flags to watch for,
+  and **prevention tips** (how to stay safe). Include all this in the "reasoning" field.
+- If the user greets you (e.g. "hi", "hello", "namaste", "kaise ho"), or asks about you ("what do you do", "who are you"),
+  respond with a "Safe" verdict and give a friendly introduction as reasoning.
+- If the user's message is completely unrelated to fraud, scams, or suspicious activity (e.g. random words, jokes,
+  gibberish, or topics outside cybersecurity), respond with "Safe" and politely say this is outside your area of
+  expertise — you specialize in fraud and scam identification only.
+- **IMPORTANT: If the user is asking about YOU (the bot) or greeting you, IGNORE the reference material completely.**
+  Do not quote or reference any of the advisories or website content. Just give a friendly introduction.
+- Similarly, if the query is unrelated to scams/fraud, IGNORE the reference material. Do not repeat it. Just say
+  the query is outside your area of expertise.
 - Give a short, clear explanation in {detected_lang} that a non-technical citizen can understand.
   Write natively in that language's script (e.g. Devanagari for Hindi), NOT transliterated.
 - If classified as "Fraud" or "Suspicious", give 2-3 concrete next steps in {detected_lang}.
@@ -151,7 +260,7 @@ Your job:
 
 Respond in valid JSON:
 {{
-  "verdict": "Fraud" | "Suspicious" | "Safe" | "Need More Information",
+  "verdict": "Fraud" | "Suspicious" | "Safe" | "Need More Information" | "Information",
   "confidence": "High" | "Medium" | "Low",
   "reasoning": "short explanation in {detected_lang}",
   "next_steps": ["step 1 in {detected_lang}", "step 2 in {detected_lang}"] or ["Ask specific question 1", "Ask specific question 2"] for Need More Information,
@@ -203,6 +312,12 @@ Classify this situation and respond in JSON."""
             lines.append("\n\U0001F6A8 Helpline: 1930")
         elif verdict_type == "Safe":
             lines.append("\n\u2705 Stay safe! Reach out if you have more questions.")
+        elif verdict_type == "Information":
+            lines.append("\n\U0001F6E1\uFE0F *Prevention Tips:*")
+            lines.append("\u2022 Never share OTP, PIN, or bank details with anyone")
+            lines.append("\u2022 Always verify caller identity through official channels")
+            lines.append("\u2022 Report suspicious activity at cybercrime.gov.in")
+            lines.append("\n\U0001F6A8 Helpline: 1930")
 
         answer = "\n".join(lines)
 

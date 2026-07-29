@@ -3,7 +3,7 @@ Citizen Fraud Shield - Verdict Generation Script (Upgraded)
 Step: User query -> FAISS retrieval (with threshold + reranker) -> LLM verdict (Groq) -> Structured output
 
 Features:
-  - 4 verdicts: Fraud, Suspicious, Safe, Need More Information
+  - 5 verdicts: Fraud, Suspicious, Safe, Need More Information, Information
   - Cosine similarity threshold filtering
   - Cross-encoder reranker
   - Safe scenarios knowledge base
@@ -105,9 +105,19 @@ You will be given:
 2. Reference material from verified advisories (CERT-In, RBI, NCRB) AND safe scenarios.
 
 Your job:
-- Classify the situation as one of: "Fraud", "Suspicious", "Safe", OR "Need More Information".
+- Classify the situation as one of: "Fraud", "Suspicious", "Safe", OR "Need More Information", OR "Information".
 - Use "Need More Information" when the user's description is too vague, unrelated to the reference material,
   or the reference material does not clearly match the situation. This is a safe fallback to avoid false alarms.
+- **Use "Information" when the user is asking for educational information or explanation** about a scam/fraud type.
+  Examples: "what is UPI scam", "tell me about digital arrest", "explain OTP fraud", "how does phishing work",
+  "UPI scam kya hai", "digital arrest ke baare mein batao". These are NOT incident reports — they are learning requests.
+- For "Information" verdict: provide a clear explanation of what the scam is, how it works, red flags to watch for,
+  and **prevention tips** (how to stay safe). Include all this in the "reasoning" field.
+- If the user greets you (e.g. "hi", "hello", "namaste", "kaise ho"), or asks about you ("what do you do", "who are you"),
+  respond with a "Safe" verdict and give a friendly introduction as reasoning.
+- If the user's message is completely unrelated to fraud, scams, or suspicious activity (e.g. random words, jokes,
+  gibberish, or topics outside cybersecurity), respond with "Safe" and politely say this is outside your area of
+  expertise — you specialize in fraud and scam identification only.
 - Give a short, clear explanation in {language} that a non-technical citizen can understand.
   Write natively in that language's script (e.g. Devanagari for Hindi), NOT transliterated.
 - If classified as "Fraud" or "Suspicious", give 2-3 concrete next steps in {language}.
@@ -119,7 +129,7 @@ Your job:
 
 Respond in valid JSON:
 {{
-  "verdict": "Fraud" | "Suspicious" | "Safe" | "Need More Information",
+  "verdict": "Fraud" | "Suspicious" | "Safe" | "Need More Information" | "Information",
   "confidence": "High" | "Medium" | "Low",
   "reasoning": "short explanation in {language}",
   "next_steps": ["step 1 in {language}", "step 2 in {language}"] or ["Ask specific question 1", "Ask specific question 2"] for Need More Information,
