@@ -941,6 +941,30 @@
       background: var(--line-strong);
     }
 
+    .btn-action.resolve-btn {
+      background: rgba(47, 190, 143, 0.08);
+      border: 1px solid rgba(47, 190, 143, 0.25);
+      color: var(--safe);
+      margin-left: auto;
+    }
+
+    .btn-action.resolve-btn:hover {
+      background: rgba(47, 190, 143, 0.2);
+      border-color: var(--safe);
+    }
+
+    .btn-action.resolve-btn.resolved {
+      background: rgba(47, 190, 143, 0.15);
+      border-color: var(--safe);
+      color: var(--safe);
+      cursor: default;
+    }
+
+    .btn-action.resolve-btn .resolve-check {
+      margin-left: 4px;
+      font-weight: bold;
+    }
+
     /* Mobile responsiveness styling */
     @media (max-width: 992px) {
       .dashboard-grid {
@@ -1986,6 +2010,129 @@
         }
       }, 50);
     }
+
+    // ─── WebSocket Client for Live Scam Alerts ───────────────────────
+    let alertWs = null;
+    let alertWsReconnectTimer = null;
+
+    function connectAlertWebSocket() {
+      if (alertWs && alertWs.readyState === WebSocket.OPEN) return;
+      try {
+        alertWs = new WebSocket("ws://localhost:8000/ws/alerts");
+
+        alertWs.onopen = () => {
+          console.log("[AlertWS] Connected to live alert feed");
+        };
+
+        alertWs.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            // Skip heartbeats and replayed messages
+            if (data.type === "heartbeat") return;
+            if (data.replayed) return;
+            addAlertCard(data);
+          } catch (e) {
+            console.warn("[AlertWS] Parse error:", e);
+          }
+        };
+
+        alertWs.onerror = (err) => {
+          console.warn("[AlertWS] Connection error:", err);
+        };
+
+        alertWs.onclose = () => {
+          console.log("[AlertWS] Disconnected. Reconnecting in 5s...");
+          alertWs = null;
+          if (alertWsReconnectTimer) clearTimeout(alertWsReconnectTimer);
+          alertWsReconnectTimer = setTimeout(connectAlertWebSocket, 5000);
+        };
+      } catch (e) {
+        console.warn("[AlertWS] Failed to connect:", e);
+        if (alertWsReconnectTimer) clearTimeout(alertWsReconnectTimer);
+        alertWsReconnectTimer = setTimeout(connectAlertWebSocket, 10000);
+      }
+    }
+
+    // ─── Dynamically add alert card to the Live Scam Alert panel ─────
+    function addAlertCard(data) {
+      const alertList = document.querySelector("#panel-alerts .alert-list");
+      if (!alertList) return;
+
+      const alertType = data.alert_type || "graph_fraud";
+      const riskLevel = data.risk_level || "HIGH";
+      const title = data.title || data.account_id || "Alert";
+      const message = data.message || data.transcript_excerpt || "";
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString();
+      const severityClass = riskLevel === "CRITICAL" ? "alert-danger" : (riskLevel === "HIGH" ? "alert-danger" : "alert-warning");
+      const tagClass = riskLevel === "CRITICAL" ? "danger" : (riskLevel === "HIGH" ? "danger" : "warning");
+      let tagText;
+      if (alertType === "graph_fraud") {
+        tagText = data.account_status === "frozen" ? "● ❄️ FROZEN ACCOUNT" : "● 📋 REPORTED ACCOUNT";
+      } else {
+        tagText = "● " + (riskLevel === "CRITICAL" ? "CRITICAL INCIDENT" : "HIGH ALERT");
+      }
+
+      const card = document.createElement("div");
+      card.className = `feed-card ${severityClass}`;
+      card.style.animation = "fadeIn 0.3s ease-out";
+      card.innerHTML = `
+        <div class="card-head">
+          <span class="alert-tag ${tagClass}">${tagText}</span>
+          <span class="time-stamp">${timeStr}</span>
+        </div>
+        <h4>${title}</h4>
+        <p class="transcript">${message}</p>
+        <div class="actions">
+          <button type="button" class="btn-action primary" onclick="alert('Account flagged for audit.')">Review Account</button>
+          <button type="button" class="btn-action secondary" onclick="alert('Escalation filed with cyber cell.')">Escalate</button>
+          <button type="button" class="btn-action resolve-btn" onclick="resolveAlertCard(this)">
+            <span class="resolve-text">Resolve</span>
+            <span class="resolve-check" style="display:none;">✓</span>
+          </button>
+        </div>
+      `;
+
+      // Prepend to top of alert list (newest first)
+      alertList.insertBefore(card, alertList.firstChild);
+
+      // Keep max 20 visible alerts, remove oldest
+      while (alertList.children.length > 20) {
+        alertList.removeChild(alertList.lastChild);
+      }
+    }
+
+    // ─── Resolve alert card: fade out then remove ────────────────────
+    function resolveAlertCard(btn) {
+      const card = btn.closest(".feed-card");
+      if (!card) return;
+
+      // Disable all buttons inside the card
+      const allBtns = card.querySelectorAll(".btn-action");
+      allBtns.forEach(b => b.disabled = true);
+
+      // Visual: mark as resolving
+      btn.classList.add("resolved");
+      const textSpan = btn.querySelector(".resolve-text");
+      const checkSpan = btn.querySelector(".resolve-check");
+      if (textSpan) textSpan.textContent = "Resolved";
+      if (checkSpan) checkSpan.style.display = "inline";
+
+      // Fade out and remove
+      card.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+      card.style.opacity = "0";
+      card.style.transform = "translateX(-20px)";
+      setTimeout(() => {
+        if (card.parentNode) {
+          card.parentNode.removeChild(card);
+        }
+      }, 500);
+    }
+
+    // ─── Auto-connect WebSocket on page load ────────────────────────
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(connectAlertWebSocket, 1000);
+    });
   </script>
 </body>
 
