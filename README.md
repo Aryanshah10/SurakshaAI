@@ -154,14 +154,14 @@ python -m http.server 5500
 Open `http://localhost:5500/index.html`.
 
 ### Environment variables required (`.env`)
-GROQ_API_KEY=
-OPENAI_API_KEY=
-TWILIO_ACCOUNT_SID=
-TWILIO_AUTH_TOKEN=
-NEO4J_URI=
-NEO4J_USERNAME=
-NEO4J_PASSWORD=
-SECRET_KEY= # JWT signing key
+GROQ_API_KEY
+OPENAI_API_KEY
+TWILIO_ACCOUNT_SID
+TWILIO_AUTH_TOKEN
+NEO4J_URI
+NEO4J_USERNAME
+NEO4J_PASSWORD
+SECRET_KEY  # JWT signing key
 
 ## API Endpoints (mounted in `main.py`)
 
