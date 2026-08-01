@@ -3,7 +3,7 @@ WhatsApp webhook route for Twilio — used via the main FastAPI app.
 
 Receives WhatsApp messages from Twilio, runs them through:
   1. Language detection (langdetect)
-  2. RAG retrieval (FAISS + cross-encoder reranker + similarity threshold)
+  2. RAG retrieval (ChromaDB + cross-encoder reranker + similarity threshold)
   3. Groq LLM for a contextual answer in the SAME language
 
 Supports 4 verdicts: "Fraud", "Suspicious", "Safe", "Need More Information"

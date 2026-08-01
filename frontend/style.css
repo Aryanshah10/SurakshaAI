@@ -1393,9 +1393,11 @@ a.nav-btn {
 .ph-chat-history::-webkit-scrollbar {
   width: 4px;
 }
+
 .ph-chat-history::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .ph-chat-history::-webkit-scrollbar-thumb {
   background: var(--line-strong);
   border-radius: 2px;

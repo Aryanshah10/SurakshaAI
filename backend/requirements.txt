@@ -21,7 +21,7 @@ websockets
 
 Pillow
 
-faiss-cpu
+chromadb
 langchain
 langchain-community
 sentence-transformers

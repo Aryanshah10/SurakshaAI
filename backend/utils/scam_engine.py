@@ -53,54 +53,69 @@ Label: legitimate (confidence 0.95)
 """
  
  
-def _get_omniroute_client():
-    if not OMNIROUTE_API_KEY:
-        print("[WARN] OMNIROUTE_API_KEY not set in .env — Layer 2 disabled.")
-        return None
-    try:
-        from openai import OpenAI
-        return OpenAI(
-            base_url=OMNIROUTE_URL,
-            api_key=OMNIROUTE_API_KEY,
-        )
-    except ImportError:
-        print("[WARN] openai package not installed — run: pip install openai")
-        return None
- 
- 
+def _get_llm_client():
+    groq_key = os.getenv("GROQ_API_KEY")
+    if groq_key:
+        try:
+            from groq import Groq
+            return Groq(api_key=groq_key), "groq"
+        except ImportError:
+            pass
+            
+    if OMNIROUTE_API_KEY:
+        try:
+            from openai import OpenAI
+            return OpenAI(
+                base_url=OMNIROUTE_URL,
+                api_key=OMNIROUTE_API_KEY,
+            ), "omniroute"
+        except Exception:
+            pass
+    return None, None
+
+
 def score_turn_llm(text: str, recent_context: str = "", client=None):
+    client_type = None
     if client is None:
-        client = _get_omniroute_client()
+        client, client_type = _get_llm_client()
+    else:
+        client_type = "groq" if hasattr(client, "chat") else "omniroute"
+
     if client is None:
         return None, None
- 
+
     prompt = f"""You are a scam-call detection classifier for an Indian public-safety platform.
 Classify the LATEST turn as: neutral, scam, scam_response, legitimate, or suspicious.
- 
+
 Examples:
 {FEW_SHOT_EXAMPLES}
- 
+
 Recent call context:
 {recent_context}
- 
+
 Latest turn:
 "{text}"
- 
+
 Respond ONLY as JSON: {{"label": "...", "confidence": 0.0}}"""
- 
+
     try:
-        response = client.chat.completions.create(
-            model=OMNIROUTE_SCAM_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0,
-            max_tokens=50,
-        )
+        model_name = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile") if client_type == "groq" else OMNIROUTE_SCAM_MODEL
+        kwargs = {
+            "model": model_name,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0,
+            "max_tokens": 50,
+        }
+        if client_type == "groq":
+            kwargs["response_format"] = {"type": "json_object"}
+            
+        response = client.chat.completions.create(**kwargs)
         raw = response.choices[0].message.content.strip()
         raw = raw.replace("```json", "").replace("```", "").strip()
         parsed = json.loads(raw)
         return parsed.get("label"), float(parsed.get("confidence", 0.5))
     except Exception as e:
-        print(f"[WARN] Layer 2 OmniRoute call failed: {e}")
+        print(f"[WARN] Layer 2 LLM call failed: {e}")
         return None, None
  
  

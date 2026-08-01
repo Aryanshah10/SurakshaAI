@@ -3,8 +3,7 @@ Cleans up chunks data:
 1. Removes "RAG relevance" lines from the `text` field
 2. Stores them in `metadata.rag_relevance` instead
 3. Merges in safe_scenarios.json
-4. Rebuilds the FAISS index + chunks_map.json
-   (*Embeds are normalized so that L2 search equals cosine similarity.*)
+4. Rebuilds the ChromaDB collection
 
 Run from backend/ directory:
     python scripts/clean_and_rebuild.py
@@ -12,24 +11,20 @@ Run from backend/ directory:
 
 import json
 import re
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
 from pathlib import Path
 
+import chromadb
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
 DATA_DIR = Path(__file__).parent.parent / "data"
+CHROMA_DB_PATH = str(Path(__file__).parent.parent.parent / "chroma_db")
+COLLECTION_NAME = "citizen_fraud_shield"
 
 RAG_RE_PATTERN = re.compile(
     r'\*{0,2}RAG relevance:\*{0,2}.*',
     re.DOTALL
 )
-
-
-def l2_normalize(emb: np.ndarray) -> np.ndarray:
-    """Normalize embedding rows to unit length (L2 norm = 1)."""
-    norms = np.linalg.norm(emb, axis=1, keepdims=True)
-    norms = np.maximum(norms, 1e-12)  # avoid division by zero
-    return emb / norms
 
 
 def clean_chunk(chunk: dict) -> dict:
@@ -108,35 +103,33 @@ def main():
     model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
     print("5. Generating embeddings...")
-    embeddings = model.encode(texts, show_progress_bar=True)
+    embeddings = model.encode(texts, show_progress_bar=True, convert_to_numpy=True)
 
-    # --- CRITICAL: Normalize to unit length so L2 = cosine distance ---
-    print("6. Normalizing embeddings (unit L2 norm)...")
-    embeddings = l2_normalize(np.array(embeddings).astype("float32"))
+    print(f"\n6. Setting up ChromaDB at {CHROMA_DB_PATH} ...")
+    client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
 
-    print("7. Building FAISS index (FlatL2 — equivalent to cosine search for normalized vectors)...")
-    index = faiss.IndexFlatL2(embeddings.shape[1])
-    index.add(embeddings)
+    try:
+        client.delete_collection(COLLECTION_NAME)
+        print("   Deleted existing collection.")
+    except Exception:
+        pass
 
-    index_path = DATA_DIR / "index.faiss"
-    faiss.write_index(index, str(index_path))
-    print(f"   FAISS index saved to {index_path}")
+    collection = client.create_collection(
+        name=COLLECTION_NAME,
+        metadata={"hnsw:space": "cosine"},
+    )
 
-    chunk_map = [
-        {"id": ids[i], "text": texts[i], "metadata": metadatas[i]}
-        for i in range(len(texts))
-    ]
-    map_path = DATA_DIR / "chunks_map.json"
-    with open(map_path, "w", encoding="utf-8") as f:
-        json.dump(chunk_map, f, ensure_ascii=False, indent=2)
-    print(f"   Chunks map saved to {map_path}")
-
-    # Verify
-    sample_norm = np.linalg.norm(embeddings[0])
-    print(f"\n   Verification: first embedding norm = {sample_norm:.6f} (should be ~1.0)")
+    print("7. Adding chunks to ChromaDB collection ...")
+    collection.add(
+        ids=ids,
+        embeddings=embeddings.tolist(),
+        documents=texts,
+        metadatas=metadatas,
+    )
+    print(f"   ChromaDB collection '{COLLECTION_NAME}' has {collection.count()} items.")
 
     print("\n" + "=" * 50)
-    print(f"Done! {len(all_chunks)} chunks indexed.")
+    print(f"Done! {len(all_chunks)} chunks indexed in ChromaDB.")
     print(f"  - Fraud advisory chunks: {len(cleaned)}")
     print(f"  - Safe scenario chunks:  {len(all_chunks) - len(cleaned)}")
 

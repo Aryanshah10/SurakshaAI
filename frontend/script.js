@@ -151,10 +151,10 @@ if (loginForm) {
 
       if (response.ok && data.success) {
 
-    // Save officer information
-    localStorage.setItem(
-        "officer",
-        JSON.stringify({
+        // Save officer information
+        localStorage.setItem(
+          "officer",
+          JSON.stringify({
             username: data.username,
             name: data.name,
             email: data.email,
@@ -162,22 +162,22 @@ if (loginForm) {
             badge_id: data.badge_id,
             station: data.station,
             role: data.role
-        })
-    );
-    localStorage.setItem("token", data.access_token);
-    localStorage.setItem("access_token", data.access_token);
+          })
+        );
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("access_token", data.access_token);
 
-    showLoginSuccess("Login successful. Redirecting...");
+        showLoginSuccess("Login successful. Redirecting...");
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-        // Go to officer dashboard
-        window.location.href = "officer.html";
+          // Go to officer dashboard
+          window.location.href = "officer.html";
 
-    }, 900);
+        }, 900);
 
-    return;
-}
+        return;
+      }
 
       showLoginError(data.message || 'Invalid username or password');
     } catch {
@@ -245,23 +245,27 @@ if (chatForm && chatHistory && chatInput) {
 
       if (response.ok) {
         const data = await response.json();
-        const verdictClass = data.risk_level === 'critical' || data.risk_level === 'high' ? 'danger-verdict' : 'safe-verdict';
-        const labelMap = {
-          'low': 'Safe Check · Low Risk',
-          'medium': 'Suspicious · Medium Risk',
-          'high': 'Scam Detected · High Risk',
-          'critical': 'Scam Detected · Critical'
-        };
-        const label = labelMap[data.risk_level] || 'Analysis Complete';
-        
-        let responseHtml = `<span class="verdict ${verdictClass}">${label}</span>${data.recommended_action}`;
-        
-        if (data.red_flags && data.red_flags.length > 0) {
-          responseHtml += `<br><br><small style="color: var(--alert); display: block; font-family: var(--font-mono); font-size: 11px;">MATCHED PATTERNS: ${data.red_flags.join(', ')}</small>`;
+
+        let formattedAction = (data.recommended_action || '')
+          .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+          .replace(/\n/g, '<br>');
+
+        let responseHtml = '';
+        if (data.risk_level === 'high' || data.risk_level === 'critical' || data.risk_level === 'medium') {
+          const verdictClass = (data.risk_level === 'critical' || data.risk_level === 'high') ? 'danger-verdict' : 'safe-verdict';
+          const labelMap = {
+            'medium': 'Suspicious · Medium Risk',
+            'high': 'Scam Detected · High Risk',
+            'critical': 'Scam Detected · Critical'
+          };
+          const label = labelMap[data.risk_level] || 'Analysis Complete';
+          responseHtml = `<span class="verdict ${verdictClass}">${label}</span>${formattedAction}`;
+        } else {
+          responseHtml = formattedAction;
         }
-        
+
         if (data.ncrb_draft) {
-          responseHtml += `<br><button type="button" class="btn-ncrb-copy" onclick="copyNcrbDraft('${encodeURIComponent(data.ncrb_draft)}')">Copy NCRB Report Draft</button>`;
+          responseHtml += `<br><br><button type="button" class="btn-ncrb-copy" onclick="copyNcrbDraft('${encodeURIComponent(data.ncrb_draft)}')">Copy NCRB Report Draft</button>`;
         }
 
         const botBubble = document.createElement('div');
