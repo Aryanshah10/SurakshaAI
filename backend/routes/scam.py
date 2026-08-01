@@ -197,8 +197,8 @@ def _build_response(turns: list) -> tuple[ScamAssessResponse, dict | None]:
     if risk in [RiskLevel.high, RiskLevel.critical] and alert:
         alert_payload = {
             "risk_level":       risk.value,
-            "confidence":       round(score, 2),
-            "red_flags":        red_flags,
+            "confidence":       round(min(final_score / 15.0, 1.0), 2),
+            "red_flags":        [],
             "transcript_excerpt": alert.get("transcript_excerpt", ""),
             "recommended_action": alert.get("recommended_action", ""),
         }
