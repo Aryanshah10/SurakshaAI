@@ -40,15 +40,7 @@ manager = ConnectionManager()
 @router.websocket("/ws/alerts")
 async def alert_websocket(websocket: WebSocket):
     """
-    Officer dashboard connects here.
-    TM2 wires frontend with:
-        const ws = new WebSocket("ws://localhost:8000/ws/alerts")
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data)
-            if (data.type === "scam_alert") { showAlert(data) }
-        }
- 
-    On connect: replays last 10 alerts so officer sees recent history immediately.
+    Replays last 10 alerts so officer sees recent history immediately.
     Every 30s: sends heartbeat to keep connection alive.
     On new scam: broadcast_alert() pushes in real time.
     """
