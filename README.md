@@ -10,15 +10,6 @@ India registered 1.14 million cybercrime complaints in 2023 — a 60% jump from 
 
 **SurakshaAI** shifts law enforcement from reactive case investigation to predictive threat neutralisation, converging financial transaction intelligence, fake currency detection, communication network analysis, and real-time public safety coordination into one platform.
 
-## Team
-
-| Name |
-|---|
-| Saksham Singhania|
-| Shaurya Mishra |
-| Sakshi Sahu |
-| Aryan Shah |
-
 ## Live Modules
 
 | Module | What it does |
@@ -39,6 +30,7 @@ SurakshaAI/
 │   ├── main.py                     # FastAPI entrypoint, mounts all routers
 │   ├── auth.py                     # officer authentication
 │   ├── requirements.txt
+|   ├── run_ngrok.py                # Runs the entire codebase without the need for deployment
 │   │
 │   ├── routes/
 │   │   ├── auth.py
@@ -91,9 +83,14 @@ SurakshaAI/
 │   └── yolov8c-clas.pt
 │
 ├── chroma_db/                      # top-level vector store (shared/legacy)
-├── frontend/
-│   ├── index.html                  # landing page — citizen/officer split
-│   ├── login.html                  
+└── frontend/
+    ├── index.html                  # landing page — citizen/officer split
+    ├── login.html
+    ├── officer.html
+    ├── citizen.html
+    ├── counterfeit.html
+    ├── script.js
+    └── style.css              
 
 ```
 
@@ -116,12 +113,12 @@ SurakshaAI/
 ## Architecture Flow
 
 ```Landing Page → "Are you a Citizen or Officer?"
-| |
-/citizen /officer (JWT login)
-├─ Fraud Risk Check ├─ Geospatial Heatmap
-├─ Guided NCRB Report ├─ Currency Scanner
-├─ AI Chatbot (RAG) ├─ Fraud Network Graph
-└─ Currency Scanner └─ Live Scam Alert Feed
+
+/citizen                 /officer (JWT login)
+├─ Fraud Risk Check     ├─ Geospatial Heatmap
+├─ Guided NCRB Report   ├─ Currency Scanner
+├─ AI Chatbot (RAG)     ├─ Fraud Network Graph
+└─ Currency Scanner     └─ Live Scam Alert Feed
 ```
 
 Currency Scanner is shared across both citizen and officer views, backed by the same YOLOv8 models.
@@ -129,7 +126,7 @@ Currency Scanner is shared across both citizen and officer views, backed by the 
 ## Setup
 
 ### Files to be created in backend
-#### .env file with:
+#### .env file with :
 GROQ_API_KEY
 GROQ_MODEL
 
@@ -151,24 +148,18 @@ SECRET_KEY # JWT signing key
 #### officer.py file
 Containing the officer details
 
-### Backend
+### Running Backend + Frontend 
 ```bash
 cd backend
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env            # fill in your API keys (Groq, OpenAI, Twilio, Neo4j credentials)
-python main.py
+cp .env.example .env            # fill in your API keys (Groq, OmniRoute, Twilio, Neo4j credentials)
+python main.py                  # Server for the main website
+ngrok http 8000                 # Server for Twilio WhatsApp Bot
+
 ```
 API docs available at `http://localhost:8000/docs` once running.
-
-### Frontend
-```bash
-cd frontend
-# serve statically, e.g.:
-python -m http.server 5500
-```
-Open `http://localhost:5500/index.html`.
 
 ## API Endpoints (mounted in `main.py`)
 
