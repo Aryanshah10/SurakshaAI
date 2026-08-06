@@ -16,7 +16,7 @@ India registered 1.14 million cybercrime complaints in 2023 — a 60% jump from 
 |---|---|
 | **Officer Auth** | JWT-based login with role/department/station-scoped access |
 | **Currency Scan** | YOLOv8 classifier verifying note authenticity |
-| **Fraud Graph** | Neo4j-backed graph intelligence linking accounts, devices, and phones into fraud ring clusters with court-admissible intelligence packages |
+| **Fraud Graph** | NetworkX graph intelligence linking accounts, devices, and phones into fraud ring clusters with court-admissible intelligence packages |
 | **Geospatial Hotspots** | Clusters fraud complaints + counterfeit seizure points into patrol-priority zones for command-centre use |
 | **Citizen RAG Chatbot** | ChromaDB-backed RAG assistant answering citizen fraud queries |
 | **Live Alert Feed** | WebSocket-based real-time scam/fraud alert stream for the officer dashboard |
@@ -98,30 +98,29 @@ SurakshaAI/
 
 | Layer | Technology |
 |---|---|
-| Backend API | FastAPI, Uvicorn |
-| Auth | python-jose (JWT), passlib/bcrypt |
-| Graph Database | NetworkX |
-| Computer Vision | Ultralytics YOLOv8, OpenCV, Pillow |
-| RAG / Retrieval | LangChain, sentence-transformers, ChromaDB |
-| API Keys | OmniRoute, HuggingFace, Groq, Gemini, Twilio  |
-| Messaging | Twilio (WhatsApp), python websockets |
+| Backend | FastAPI, uvicorn |
+| Auth | python-jose (JWT), passlib |
+| Fraud Network Graph | NetworkX |
+| Currency Scan | Ultralytics YOLOv8s, Pillow |
+| Website Chatbot | RAG, LangChain, sentence-transformers, ChromaDB |
+| API Keys | HuggingFace, Groq, Gemini  |
+| Geospatial Intelligence | DBScan (sklearn clustering) |
+| Messaging | Twilio (WhatsApp), python websockets, pyngrok |
 | ML Utilities | scikit-learn, imbalanced-learn, pandas, numpy |
 | Frontend | HTML, CSS, vanilla JavaScript |
-| Ops | pyngrok (tunneling for demo) |
-
 
 ## Architecture Flow
 
 ```Landing Page → "Are you a Citizen or Officer?"
 
-/citizen                 /officer (JWT login)
+/citizen                 /officer (JWT Authorisation)
 ├─ Fraud Risk Check     ├─ Geospatial Heatmap
 ├─ Guided NCRB Report   ├─ Currency Scanner
-├─ AI Chatbot (RAG)     ├─ Fraud Network Graph
+├─ RAG Chatbot          ├─ Fraud Network Graph
 └─ Currency Scanner     └─ Live Scam Alert Feed
 ```
 
-Currency Scanner is shared across both citizen and officer views, backed by the same YOLOv8 models.
+Currency Scanner is shared across both citizen and officer views, backed by the same YOLOv8s models.
 
 ## Setup
 
@@ -154,7 +153,7 @@ cd backend
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env            # fill in your API keys (Groq, OmniRoute, Twilio, Neo4j credentials)
+cp .env.example .env            # fill in your API keys (Groq, Twilio, Gemini credentials)
 python main.py                  # Server for the main website
 ngrok http 8000                 # Server for Twilio WhatsApp Bot
 
@@ -167,7 +166,7 @@ API docs available at `http://localhost:8000/docs` once running.
 |---|---|
 | `/login` | Officer authentication |
 | `/scam/*` | Digital arrest scam detection |
-| `/currency/*` | Currency authenticity + denomination scan |
+| `/currency/*` | Currency authenticity scan |
 | `/graph/*` | Fraud network graph queries |
 | `/geospatial/*` | Hotspot + patrol priority queries |
 | `/citizen/*` | RAG chatbot |
